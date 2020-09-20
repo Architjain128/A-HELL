@@ -68,6 +68,9 @@ typedef long long int ll;
 int main()
 {
     system("clear");
+    stdin_fd = dup(STDIN_FILENO);
+    stderr_fd = dup(STDERR_FILENO);
+    stdout_fd = dup(STDOUT_FILENO);
     msg();
     prompt_init();
     signal(SIGCHLD, handler);
@@ -123,7 +126,7 @@ int main()
                 else if(fu_redi!=0)
                 {
                     callingredi(amd);
-                    // printf("red off");
+
                 }
 
 

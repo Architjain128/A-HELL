@@ -1,20 +1,20 @@
-ls
-ls
-ls
-cd ..
-ls
-ls
-ls
-ls
-ls
-ls
-ls
-cd .
-cd .
-cd ..
-cd ~
-ls
-echo hello > in.txt
-ls
-echo pun > in.txt
-ls
+echo del > in.txt
+echo jj > in.txt
+echo oi > in.txt
+echo my > in.txt
+echo wdbv vow  ob  > in.txt
+echo hi my nam > in.txt
+echo gi > in.txt
+echo gigi >> in.txt
+gcc zz.c
+./a.out < in.txt > ou.txt
+./a.out < in.txt >> ou.txt
+./a.out < in.txt
+./a.out < inm.txt
+./a.out < in.txt 
+./a.out < inm.txt
+./a.out < in.txt > ou.txt
+./a.out < in.txt >> ou.txt
+./a.out < in.txt
+./a.out < inm.txt
+./a.out < inm.txt 
