@@ -1,0 +1,20 @@
+ls
+ls
+ls
+cd ..
+ls
+ls
+ls
+ls
+ls
+ls
+ls
+cd .
+cd .
+cd ..
+cd ~
+ls
+echo hello > in.txt
+ls
+echo pun > in.txt
+ls
