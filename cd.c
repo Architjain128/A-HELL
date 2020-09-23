@@ -40,6 +40,12 @@ void callingcd(char *str,int zip, char *str1)
             fprintf(stdout,"\033[1;31m--> ERROR : directory not found [ %s ]\033[0m\n",temp);
             }
         }
+        else if(temp[0]=='-')
+        {
+            printf("%s\n",predir);
+            if(chdir(predir)<0)
+            fprintf(stdout,"\033[1;31m--> ERROR : directory not found [ %s ]\033[0m\n",temp);
+        }
         else{
             
             if(chdir(temp)<0)

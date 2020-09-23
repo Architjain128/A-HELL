@@ -62,20 +62,28 @@ if(bg==1)
     }
     if(pid==0)
     {
+        // signal(SIGTTIN, SIG_IGN);
+        // signal(SIGTTOU, SIG_IGN);
+        // tcsetpgrp(STDIN_FILENO, pid);
         if ( execvp(inp[0], inp) <0)
         {
             fprintf(stderr,"command: %s, not found\n",inp[0] );
             exit(0);
         }
+    
+        // signal(SIGTTIN, SIG_DFL);
+        // signal(SIGTTOU, SIG_DFL);
     	
     }
     else
     {
+     
         order[job_counter][0]=pid;
         strcpy(back_pro[order[job_counter][0]],cum);
         stat_pro[order[job_counter][0]] = 2;
         order[job_counter][1] = -1;
         job_counter++;
+      
     }
     
 }
@@ -107,6 +115,36 @@ else
        waitpid(pid,&st,0);
 
     }
+    /*
+     fgPid = pid;
+                signal(SIGTTIN, SIG_IGN);
+                signal(SIGTTOU, SIG_IGN);
+                tcsetpgrp(STDIN_FILENO, pid);
+                waitpid(pid, &status, WUNTRACED);
+                if (WIFSTOPPED(status))
+                {
+                    char stringToAdd[500];
+                    strcpy(stringToAdd, Commands[currCommand].command);
+                    strcat(stringToAdd, " ");
+                    for (int i = 0; i < Commands[currCommand].flagsIndex; i++)
+                    {
+                        strcat(stringToAdd, Commands[currCommand].flags[i]);
+                        strcat(stringToAdd, " ");
+                    }
+
+                    for (int i = 0; i < Commands[currCommand].argumentsIndex; i++)
+                    {
+                        strcat(stringToAdd, Commands[currCommand].arguments[i]);
+                        strcat(stringToAdd, " ");
+                    }
+                    addJob(pid, stringToAdd);
+                }
+                tcsetpgrp(STDIN_FILENO, getpgrp());
+                signal(SIGTTIN, SIG_DFL);
+                signal(SIGTTOU, SIG_DFL);
+
+                fgPid = 0;
+     */
 }
 
     // if(bg==0) 

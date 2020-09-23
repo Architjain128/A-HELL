@@ -17,12 +17,15 @@ void msg()
 }
 void exitmsg()
 {
-    printf("\033[1;34m<<==============================================================>>\033[0m\n");
+    printf("\n\033[1;34m<<==============================================================>>\033[0m\n");
     printf("\033[1;31m                     OH HELL NO :(\n");
     printf("\033[0;31m                         BYE !!!\n");
     printf("\033[1;34m<<==============================================================>>\033[0m\n");
 }
-
+void handler_exit(int sig){
+    exitmsg();
+    exit(0); 
+}
 
 #include "pwd.h"
 #include "cd.h"
@@ -38,7 +41,7 @@ void exitmsg()
 #include "nightwatch.h"
 
 typedef long long int ll;
-
+int zpipp=0;
 int main()
 {
     system("clear");
@@ -56,9 +59,16 @@ int main()
     prompt_init();
     while(1)
     {
+        signal(SIGTERM,handler_exit);
+        strcpy(predir,curdir);
         getcwd(curdir,sizeof(curdir));
+        if(zpipp==0)
+        {
+            strcpy(predir,curdir);
+            zpipp++;
+        }
         prompt_pathy();
-        sprintf(dis, "<\033[1;32m%s\033[0m@\033[1;32m%s\033[0m:\033[1;34m%s\033[0m> ",user,host,dir);
+        sprintf(dis, "\n<\033[1;32m%s\033[0m@\033[1;32m%s\033[0m:\033[1;34m%s\033[0m> ",user,host,dir);
         fprintf(stdout,"%s",dis);
         fflush(stdout);
 
@@ -87,6 +97,12 @@ int main()
             amd[strlen(a)]='\0';
             while(amd[pin]==' ' ||amd[pin]=='\t' )
             pin++;
+
+            // if(strlen(amd)==0 || amd[pin]=='EOF')
+            // {
+            //     exitmsg();
+            //     exit(0);
+            // }
 
              fu_pipe=0;
                 fu_redi=0;
@@ -303,9 +319,56 @@ int main()
                 else
                 fprintf(stdout,"\033[1;31m--> ERROR : command not found [ %s ]\033[0m\n",amd);
             }
+            else if(amd[pin]=='o' && amd[pin+1]=='v' && amd[pin+2]=='e' && amd[pin+3]=='r' && amd[pin+4]=='k'&& amd[pin+5]=='i' && amd[pin+6]=='l'&& amd[pin+7]=='l')
+            {
+                pin+=8;
+                if(amd[pin]==' ' || amd[pin]=='\0')
+                {
+                    while(amd[pin]==' ')
+                    {
+                        pin++;
+                    }
+                    callingoverkill();
+                }
+                else
+                {
+                    fprintf(stdout,"\033[1;31m--> ERROR : command not found [ %s ]\033[0m\n",amd);
+                }
+            }
+
+            else if(amd[pin]=='b' && amd[pin+1]=='g')
+            {
+                pin+=2;
+                if(amd[pin]==' ' || amd[pin]=='\0')
+                {
+                    while(amd[pin]==' ')
+                    {
+                        pin++;
+                    }
+                    callingbg(amd);
+                }
+                else
+                {
+                    fprintf(stdout,"\033[1;31m--> ERROR : command not found [ %s ]\033[0m\n",amd);
+                }
+            }
 
             // exit 
             else if(amd[pin]=='e' && amd[pin+1]=='x' && amd[pin+2]=='i' && amd[pin+3]=='t')
+            {
+                pin+=4;
+                if(amd[pin]==' ' || amd[pin]=='\0')
+                {
+                    exitmsg();
+                    exit(0); 
+                }
+                else
+                {
+                    fprintf(stdout,"\033[1;31m--> ERROR : command not found [ %s ]\033[0m\n",amd);
+                }
+            }
+            // quit
+            else if(amd[pin]=='q' && amd[pin+1]=='u' && amd[pin+2]=='i' && amd[pin+3]=='t')
             {
                 pin+=4;
                 if(amd[pin]==' ' || amd[pin]=='\0')

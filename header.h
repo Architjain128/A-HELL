@@ -28,6 +28,7 @@ char dis[8000000];
 char dir[1000000];
 char execut[1000000];
 char curdir[1000000];
+char predir[1000000];
 char amd[1000000];
 char host[100];
 char user[100];

@@ -1,20 +1,20 @@
-kjob 1 9
+cd .. 
+cd ~
+cd .
+.cd ..
+cd ..
+cd ..
+cd -
+cd -
 evince &
-code .. &
-jobs
-kjobs 1
-jobs
-kjob 1 5
-evince &
-code .. &
-jobs
-kjob 1 5
-evince &
-code .. &
 jobs
 jobs
-kjob 1 5
-kjob 2 5
-kjob 0 5
-kjob 1 5
-kjob 2 5
+bg 1
+cd -
+cd -
+cd -
+cd ..
+cd -
+cd -
+cd ..
+cd -
