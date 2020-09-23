@@ -89,7 +89,7 @@ void callingredi(char *str)
             if(inp_fd<0)
             {
                 perror("input file");
-                printf("\033[0;33m--> WARNING : input file [%s] not exist, enter data in STDIN mode  \033[0m\n",inp_file)
+                printf("\033[0;33m--> WARNING : input file [%s] not exist, enter data in STDIN mode  \033[0m\n",inp_file);
                 flag_inp=0;
             }
             else{

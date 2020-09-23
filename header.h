@@ -32,14 +32,13 @@ char amd[1000000];
 char host[100];
 char user[100];
 char *pidname;
-char helper[1000000];
+char helper[1000];
 int stdin_fd ;
 int stderr_fd ;
 int stdout_fd;
-ll cur_pid;
-char **back_arr;
-ll back_status[100000];
-
-
+int job_counter;
+int order[40000][2];
+char back_pro[40000][1000];
+int stat_pro[40000];
 
 #endif

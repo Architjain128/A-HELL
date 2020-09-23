@@ -1,20 +1,20 @@
-echo del > in.txt
-echo jj > in.txt
-echo oi > in.txt
-echo my > in.txt
-echo wdbv vow  ob  > in.txt
-echo hi my nam > in.txt
-echo gi > in.txt
-echo gigi >> in.txt
-gcc zz.c
-./a.out < in.txt > ou.txt
-./a.out < in.txt >> ou.txt
-./a.out < in.txt
-./a.out < inm.txt
-./a.out < in.txt 
-./a.out < inm.txt
-./a.out < in.txt > ou.txt
-./a.out < in.txt >> ou.txt
-./a.out < in.txt
-./a.out < inm.txt
-./a.out < inm.txt 
+kjob 1 9
+evince &
+code .. &
+jobs
+kjobs 1
+jobs
+kjob 1 5
+evince &
+code .. &
+jobs
+kjob 1 5
+evince &
+code .. &
+jobs
+jobs
+kjob 1 5
+kjob 2 5
+kjob 0 5
+kjob 1 5
+kjob 2 5

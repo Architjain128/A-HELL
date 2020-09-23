@@ -23,43 +23,17 @@ void exitmsg()
     printf("\033[1;34m<<==============================================================>>\033[0m\n");
 }
 
-void handler(int sig)
-{
-	pid_t pid;
-    // char opopop[100000];
-	int status;
-	char *exit=(char *)malloc(1024*(sizeof(char)));
-	char *exit_status=(char *)malloc(1024*(sizeof(char)));
-	pid=waitpid(0,&status,WNOHANG);
-    
-	sprintf(exit,"\n[ %s ] with pid %d exited ",helper,pid);
-	if(WIFEXITED(status))
-	{
-		int ab=WEXITSTATUS(status);
-		if(ab==0)
-			sprintf(exit_status, "normally\n");
-		else
-			sprintf(exit_status, "abnormally\n");
-	}
-	if(pid>0)
-	{
-		printf("%s%s",exit,exit_status);
-        // getcwd(curdir,sizeof(curdir));
-        // prompt_pathy();
-	    // sprintf(dis, "<\033[1;32m%s\033[0m@\033[1;32m%s\033[0m:\033[1;34m%s\033[0m> ",user,host,dir);
-        // fprintf(stdout,"%s",dis);
-	}
-	free(exit);
-	return;
-}
+
 #include "pwd.h"
 #include "cd.h"
 #include "echo.h"
 #include "ls.h"
 #include "cmd.h"
 #include "redi.h"
+#include "piponly.h"
 #include "pinfo.h"
 #include "added.h"
+// #include "piponly.h"
 #include "history.h"
 #include "nightwatch.h"
 
@@ -70,10 +44,16 @@ int main()
     system("clear");
     stdin_fd = dup(STDIN_FILENO);
     stderr_fd = dup(STDERR_FILENO);
-    stdout_fd = dup(STDOUT_FILENO);
+    stdout_fd = dup(STDOUT_FILENO); 
+    job_counter=0;
+    order[job_counter][0]=getpid();
+    stat_pro[order[job_counter][0]]=1;
+    order[job_counter][1]=0;
+    strcpy(back_pro[order[job_counter][0]],"./A-Hell");
+    job_counter++;
+
     msg();
     prompt_init();
-    signal(SIGCHLD, handler);
     while(1)
     {
         getcwd(curdir,sizeof(curdir));
@@ -119,13 +99,19 @@ int main()
                 }
 
 
-                if(fu_pipe!=0)
+                if(fu_pipe!=0 && fu_redi==0)
                 {
-                    // pipipip
+                    callingpiponly(amd);
                 }
-                else if(fu_redi!=0)
+                else if(fu_redi!=0 && fu_pipe==0)
                 {
                     callingredi(amd);
+
+                }
+                else if(fu_redi!=0 && fu_pipe!=0)
+                {
+                    printf("remain\n");
+                    callingpiponly(amd);
 
                 }
 
@@ -297,6 +283,25 @@ int main()
                 {
                     fprintf(stdout,"\033[1;31m--> ERROR : command not found [ %s ]\033[0m\n",amd);
                 }
+            }
+            // jobs
+            else if(amd[pin]=='j' && amd[pin+1]=='o' && amd[pin+2]=='b' && amd[pin+3]=='s')
+            {
+                pin+=4;
+                if(amd[pin]==' ' || amd[pin]=='\0')
+                callingjobs();
+                else
+                fprintf(stdout,"\033[1;31m--> ERROR : command not found [ %s ]\033[0m\n",amd);
+            }
+              
+              // kjobs
+            else if(amd[pin]=='k' && amd[pin+1]=='j' && amd[pin+2]=='o' && amd[pin+3]=='b')
+            {
+                pin+=4;
+                if(amd[pin]==' ' || amd[pin]=='\0')
+                callingkjob(amd);
+                else
+                fprintf(stdout,"\033[1;31m--> ERROR : command not found [ %s ]\033[0m\n",amd);
             }
 
             // exit 
