@@ -1,20 +1,20 @@
-cd .. 
-cd ~
-cd .
-.cd ..
-cd ..
-cd ..
-cd -
-cd -
-evince &
-jobs
-jobs
-bg 1
-cd -
-cd -
-cd -
-cd ..
-cd -
-cd -
-cd ..
-cd -
+more in.txt | 
+more in.txt |
+more in.txt 
+more in.txt
+more in.tx
+more in.t
+more in.
+more in
+more i
+more 
+more
+mor
+mo
+m
+
+more in.txt | wcc
+more in.txt | wc
+cat in.txt | grep new | wc
+cat in.txt | grep new | wc
+cat in.txt | grep new | wc

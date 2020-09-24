@@ -33,18 +33,26 @@ void handler_exit(int sig){
 #include "ls.h"
 #include "cmd.h"
 #include "redi.h"
-#include "piponly.h"
+#include "pipe.h"
 #include "pinfo.h"
-#include "added.h"
+#include "env.h"
+#include "jobs.h"
 // #include "piponly.h"
 #include "history.h"
 #include "nightwatch.h"
-
+void d_handler(int signum)
+{
+    exitmsg();
+    exit(0);
+    // return;
+}
 typedef long long int ll;
 int zpipp=0;
 int main()
 {
     system("clear");
+    // signal(SIGTERM,handler_exit);
+    // signal(SIGTSTP, d_handler);
     stdin_fd = dup(STDIN_FILENO);
     stderr_fd = dup(STDERR_FILENO);
     stdout_fd = dup(STDOUT_FILENO); 
@@ -59,7 +67,6 @@ int main()
     prompt_init();
     while(1)
     {
-        signal(SIGTERM,handler_exit);
         strcpy(predir,curdir);
         getcwd(curdir,sizeof(curdir));
         if(zpipp==0)
@@ -68,7 +75,7 @@ int main()
             zpipp++;
         }
         prompt_pathy();
-        sprintf(dis, "\n<\033[1;32m%s\033[0m@\033[1;32m%s\033[0m:\033[1;34m%s\033[0m> ",user,host,dir);
+        sprintf(dis, "<\033[1;32m%s\033[0m@\033[1;32m%s\033[0m:\033[1;34m%s\033[0m> ",user,host,dir);
         fprintf(stdout,"%s",dis);
         fflush(stdout);
 
@@ -98,13 +105,12 @@ int main()
             while(amd[pin]==' ' ||amd[pin]=='\t' )
             pin++;
 
-            // if(strlen(amd)==0 || amd[pin]=='EOF')
-            // {
-            //     exitmsg();
-            //     exit(0);
-            // }
-
-             fu_pipe=0;
+            if(amd[pin]=='\0' && pop==0)
+            {
+                exitmsg();
+                exit(0);
+            }
+                fu_pipe=0;
                 fu_redi=0;
                 for(ll xi=0;xi<strlen(amd);xi++)
                 {
@@ -336,6 +342,25 @@ int main()
                 }
             }
 
+            // fg
+            else if(amd[pin]=='f' && amd[pin+1]=='g')
+            {
+                pin+=2;
+                if(amd[pin]==' ' || amd[pin]=='\0')
+                {
+                    while(amd[pin]==' ')
+                    {
+                        pin++;
+                    }
+                    callingfg(amd);
+                }
+                else
+                {
+                    fprintf(stdout,"\033[1;31m--> ERROR : command not found [ %s ]\033[0m\n",amd);
+                }
+            }
+
+            // bg
             else if(amd[pin]=='b' && amd[pin+1]=='g')
             {
                 pin+=2;

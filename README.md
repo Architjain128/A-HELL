@@ -14,16 +14,18 @@
 + exit
 + foreground commands
 + background commands with exit status
+
 - BONUS COMMANDS
     + history
     + nightswatch
         + interrupt
         + nerborn
+    + last dir : assuming that in starting of shell lastdir = executable address (till directory changes)
+
 - EXTRA COMMANDS
     + to clear the terminal screen by system("cls")
         * syntax -> clear
-    + to exit the shell
-        * syntax -> exit
+
 
 ## Modular Explaination
 + C files
@@ -37,7 +39,9 @@
     + cmd.c       : codes for back/foreground command 
     + history.c   : codes for history command 
     + nightwatch.c    :codes for nightswatch command
-
+    + redi.c : code for redirection commands only(SP1)
+    + piponly.c : code for pipeonly commands only(SP2)
+    + added.c     : new cmds (setenv,unsetenv,jobs,kjob,fg,bg,overkill,quit)(SP4)
 
 + Header file
     + header.h
@@ -50,6 +54,10 @@
     + cmd.h
     + history.h
     + nightswatch.h
+    + redi.h
+    + piponly.h
+    + added.h
+
 + makefile   
 
 + README.md  : itself 
@@ -64,9 +72,7 @@
 + added extra msg at starting and exit position
 
 ## POSSIBLE ERRORS
-+ a warning for using a flag + in %s ignore that
 + printing of prompt twice when q+enter is pressed in nightswatch (one for q+enter and other for next command ig!code)
-+ if multiple bg cmd are inserted in one line seprated by ; exit status of only last one will be shown in terminal 
 + their is problem in strtok function it is not working as wanted (don't know why? working fine and submitted 2 days earlier to deadline but found on last day; this was also discussed by two Ta but i can't sort it)
 + they are working fine when one command is entered at a time it is breaking **cd Desktop/** to **cd** and **Desk** or any other subsequence <br/><br/>
 <img src="./sub.jpeg" width="400">

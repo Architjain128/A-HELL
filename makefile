@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall
 DFLAGS = -lm
-OBJFILES = archit.o added.o link.o prompt.o pwd.o cd.o echo.o ls.o cmd.o pinfo.o history.o nightwatch.o redi.o piponly.o 
+OBJFILES = archit.o  jobs.o env.o prompt.o pwd.o cd.o echo.o ls.o cmd.o pinfo.o history.o nightwatch.o redi.o pipe.o 
 TARGET = A-Hell
 TEXT = history.txt
 
