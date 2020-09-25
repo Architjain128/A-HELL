@@ -1,20 +1,20 @@
-more in.txt | 
-more in.txt |
-more in.txt 
-more in.txt
-more in.tx
-more in.t
-more in.
-more in
-more i
-more 
-more
-mor
-mo
-m
-
-more in.txt | wcc
-more in.txt | wc
-cat in.txt | grep new | wc
-cat in.txt | grep new | wc
-cat in.txt | grep new | wc
+cd ..
+env
+cd ..
+env
+cd -
+cd-
+cd -
+cd ..
+cd ..
+cd ..
+cd -
+cd -
+cd archit/Desktop
+cd -
+cd -
+ls
+make clean
+ls
+git add.
+git add .

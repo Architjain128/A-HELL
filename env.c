@@ -2,8 +2,8 @@
 
 void callingsetenv(char* str)
 {
-    int set_flag_arg=0;
-    char *setinp[100];
+    char *setinp[10];
+    char set2inp[10000];
     const char setdelimiters[] = " \t\0";
     char *totken = strtok(str, setdelimiters);
     ll i=0;
@@ -12,21 +12,32 @@ void callingsetenv(char* str)
         if(strcmp(totken,"setenv")!=0)
         {
             setinp[i]=totken;
+            if(i!=0)
+            {
+                if(i==1)
+                strcpy(set2inp,totken);
+                else
+                {
+                    strcat(set2inp," ");
+                    strcat(set2inp,totken);
+                }
+            }
             i++;
         }
         totken = strtok(NULL, setdelimiters);
     }
-    if(set_flag_arg==1)
-    printf("\033[0;33m--> WARNING : too many arguments \033[0m\n");
+   
     if(i<2)
     {
         printf("\033[0;33m--> WARNING : value is NULL \033[0m\n");
         strcpy(setinp[1],"");
     }
-    if(setenv(setinp[0],setinp[1],1)==-1)
+    else if(setenv(setinp[0],set2inp,1)==-1)
     {
-        printf("\033[0;33m--> ERROR : setenv failed \033[0m");
+        printf("\033[0;33m--> ERROR : setenv failed \033[0m\n");
         perror(";(");
+        exit_fail=1;
+        exit(EXIT_FAILURE);
     }
 }
 
@@ -48,10 +59,20 @@ void callingunsetenv(char* str)
     }
     if(unset_flag_arg==1)
     printf("\033[0;33m--> WARNING : too many arguments \033[0m\n");
-   
-    if(unsetenv(unsetinp[0])==-1)
+    
+    char *pikabu = getenv(unsetinp[0]);
+    if(pikabu==NULL)
     {
-        printf("\033[0;33m--> ERROR : unsetenv failed \033[0m");
-        perror(";(");
+        printf("\033[0;33m--> ERROR : %s variable not exists \033[0m\n",unsetinp[0]);
+        exit_fail=1;
+    }
+    else
+    {
+        if(unsetenv(unsetinp[0])<0)
+        {
+            printf("\033[0;33m--> ERROR : unsetenv failed \033[0m\n");
+            perror(";(");
+            exit_fail=1;
+        }
     }
 }

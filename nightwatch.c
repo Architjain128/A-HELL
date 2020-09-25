@@ -80,6 +80,8 @@ void nightwatch(char *str, char *str1){
                     ret = select(STDIN_FILENO + 1, &readfds, NULL, NULL, &tv);
                     if (ret < 0) {
                    		fprintf(stdout,"\033[1;31m--> ERROR : undefined keystroke\033[0m\n");
+        exit_fail=1;
+
                         exit(1);
                     } 
                     else if (ret == 0) 
@@ -136,6 +138,8 @@ void nightwatch(char *str, char *str1){
                 ret = select(STDIN_FILENO + 1, &readfds, NULL, NULL, &tv);
                 if (ret < 0) {
                     fprintf(stdout,"\033[1;31m--> ERROR : undefined keystroke\033[0m\n");
+        exit_fail=1;
+
                     exit(1);
                 } 
                 else if (ret == 0) 
@@ -153,5 +157,7 @@ void nightwatch(char *str, char *str1){
         }
         else{
             printf("--> ERROR : command not found\n");
+        exit_fail=1;
+
         }
 }

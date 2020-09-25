@@ -41,5 +41,6 @@ int job_counter;
 int order[40000][2];
 char back_pro[40000][1000];
 int stat_pro[40000];
-
+int exit_fail;
+int cur_pid;
 #endif

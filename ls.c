@@ -40,6 +40,8 @@ void callingls(char *str,int zip,char *str1)
         if(Ddir==NULL)
         {
 		    fprintf(stdout,"\033[1;31m--> ERROR :cannot read directory [ %s ]\033[0m\n",temp);
+        exit_fail=1;
+
             return;
         }
             while((Di=readdir(Ddir))!=NULL)
@@ -127,6 +129,8 @@ void callingls(char *str,int zip,char *str1)
         if(Ddir==NULL)
         {
             fprintf(stdout,"\033[1;31m--> ERROR :cannot read directory [ %s ]\033[0m\n",temp);
+        exit_fail=1;
+
             return;
         }
             while((Di=readdir(Ddir))!=NULL)
@@ -217,6 +221,8 @@ void callingls(char *str,int zip,char *str1)
             if(Ddir==NULL)
             {
                 fprintf(stdout,"\033[1;31m--> ERROR :cannot read directory [ %s ]\033[0m\n",temp);
+        exit_fail=1;
+
                 return;
             }
             printf("%s:\n",temp);
@@ -342,6 +348,8 @@ void callingla(char *str,int zip,char *str1)
         if(Ddir==NULL)
         {
            	fprintf(stdout,"\033[1;31m--> ERROR :cannot read directory [ %s ]\033[0m\n",temp);
+        exit_fail=1;
+
             return;
         }
             while((Di=readdir(Ddir))!=NULL)
@@ -385,7 +393,10 @@ void callingla(char *str,int zip,char *str1)
         if(Ddir==NULL)
         {
             fprintf(stdout,"\033[1;31m--> ERROR :cannot read directory [ %s ]\033[0m\n",temp);
+        exit_fail=1;
+
             return;
+
         }
         while((Di=readdir(Ddir))!=NULL)
         {
@@ -428,6 +439,8 @@ void callingla(char *str,int zip,char *str1)
             if(Ddir==NULL)
             {
             	fprintf(stdout,"\033[1;31m--> ERROR :cannot read directory [ %s ]\033[0m\n",temp);
+        exit_fail=1;
+
                 return;
             }
             printf("%s:\n",temp);

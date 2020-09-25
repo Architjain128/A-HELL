@@ -11,9 +11,18 @@
 + cd
 + ls
 + pinfo
-+ exit
++ exit/quit
 + foreground commands
 + background commands with exit status
++ 
++ setenv
++ unsetenv
++ jobs
++ kjob
++ fg
++ bg
++ overkill
+
 
 - BONUS COMMANDS
     + history
@@ -21,6 +30,7 @@
         + interrupt
         + nerborn
     + last dir : assuming that in starting of shell lastdir = executable address (till directory changes)
+    + exit status 
 
 - EXTRA COMMANDS
     + to clear the terminal screen by system("cls")
@@ -41,7 +51,8 @@
     + nightwatch.c    :codes for nightswatch command
     + redi.c : code for redirection commands only(SP1)
     + piponly.c : code for pipeonly commands only(SP2)
-    + added.c     : new cmds (setenv,unsetenv,jobs,kjob,fg,bg,overkill,quit)(SP4)
+    + env.c     : new cmds (setenv,unsetenv)
+    + jobs.c : new cmds (jobs,kjob,fg,bg,overkill)
 
 + Header file
     + header.h

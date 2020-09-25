@@ -89,6 +89,8 @@ void callingredi(char *str)
             if(inp_fd<0)
             {
                 perror("input file");
+        exit_fail=1;
+
                 printf("\033[0;33m--> WARNING : input file [%s] not exist, enter data in STDIN mode  \033[0m\n",inp_file);
                 flag_inp=0;
             }
@@ -96,6 +98,8 @@ void callingredi(char *str)
                 if(dup2(inp_fd,STDIN_FILENO)<0)
                 {
                     perror("duplicate input fd");
+        exit_fail=1;
+
                 exit(0);
 
                 }    
@@ -107,6 +111,8 @@ void callingredi(char *str)
             if(out_fd<0)
             {
                 perror("output file");
+        exit_fail=1;
+
                 exit(0);
 
             }
@@ -114,6 +120,8 @@ void callingredi(char *str)
                 if(dup2(out_fd,STDOUT_FILENO)<0)
                 {
                     perror("duplicate output fd");
+        exit_fail=1;
+
                 exit(0);
 
                 }    
@@ -125,6 +133,8 @@ void callingredi(char *str)
             if(out_fd<0)
             {
                 perror("output append file");
+        exit_fail=1;
+
                 exit(0);
 
             }
@@ -132,6 +142,8 @@ void callingredi(char *str)
                 if(dup2(out_fd,STDOUT_FILENO)<0)
                 {
                     perror("duplicate output append fd");
+        exit_fail=1;
+
                 exit(0);
 
                 }    
@@ -144,6 +156,8 @@ void callingredi(char *str)
         {
             close(out_fd);
             perror("forking");
+        exit_fail=1;
+
                 exit(0);
 
         }
@@ -152,6 +166,8 @@ void callingredi(char *str)
             if(execvp(reruntask[0],reruntask)<0)
             {
                 perror("command not found");
+        exit_fail=1;
+
                 exit(0);
             }
             exit(0);
@@ -162,10 +178,14 @@ void callingredi(char *str)
             if(dup2(stdout_fd,STDOUT_FILENO)<0)
             {
                 perror("reassign sdtout");
+        exit_fail=1;
+
             }
             if(dup2(stdin_fd,STDIN_FILENO)<0)
             {
                 perror("reassign STDIN_FILENO");
+        exit_fail=1;
+
             } 
 
         }    

@@ -79,6 +79,8 @@ void callingpiponly(char *str)
     for(i = 0; i < (num_pipe); i++){
         if(pipe(pipefds + i*2) < 0) {
             perror("couldn't pipe");
+        exit_fail=1;
+
             exit(EXIT_FAILURE);
         }
     }
@@ -95,18 +97,24 @@ void callingpiponly(char *str)
         if(pid<0)
         {
             perror("fork error");
+        exit_fail=1;
+
         }
         else if(pid==0) 
         {
             if(hi<num_pipe){
                 if(dup2(pipefds[j + 1], 1) < 0){
                     perror("dup21");
+        exit_fail=1;
+
                     exit(EXIT_FAILURE);
                 }
             }
             if( j!=0){
                 if(dup2(pipefds[j-2], 0) < 0){
                     perror(" dup22");
+        exit_fail=1;
+
                     exit(EXIT_FAILURE);
                 }
             }
@@ -116,10 +124,14 @@ void callingpiponly(char *str)
 
             if( execvp(runtask[0], runtask) < 0 ){
                     perror("oops");
+        exit_fail=1;
+
                     exit(EXIT_FAILURE);
             }
         } else if(pid < 0){
             perror("error");
+        exit_fail=1;
+
             exit(EXIT_FAILURE);
         }
         hi++;

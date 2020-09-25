@@ -11,20 +11,20 @@ void callingjobs(){
             printf("[%lld] running as shell %s [%d]\n",j,back_pro[order[i][0]],order[i][0]);
             j++;
         }
-        else if(order[i][1]==-1)
+        else if(order[i][1]==-1 || stat_pro[order[i][0]]==2)
         {
             if(stat_pro[order[i][0]]==0)
             {
                 printf("[%lld] stopped %s [%d]\n",j,back_pro[order[i][0]],order[i][0]);
             }
-            else 
+            else if(stat_pro[order[i][0]]==2)
             {
                 char * var2=(malloc(sizeof(char)*1005));
                 sprintf(var2,"/proc/%d/stat",order[i][0]);
                 FILE *f =fopen(var2,"r");
                 if(f==NULL) 
                 {
-                    printf("[%lld] unknown(no file as /proc/%d exist) %s [%d]\n",j,order[i][0],back_pro[order[i][0]],order[i][0]);
+                    printf("[%lld] stopped (unknown) %s [%d]\n",j,back_pro[order[i][0]],order[i][0]);
                 }
                 else
                 {
@@ -75,11 +75,15 @@ void callingkjob(char *str)
     if(i<2)
     {
         fprintf(stdout,"\033[1;31m--> ERROR : to few arguments \033[0m\n");
+        exit_fail=1;
+
         exit(EXIT_FAILURE);
     }
     if(i>2)
     {
         fprintf(stdout,"\033[1;31m--> ERROR : too many arguments \033[0m\n");
+        exit_fail=1;
+
         exit(EXIT_FAILURE);
     }
     if(i==2)
@@ -97,6 +101,8 @@ void callingkjob(char *str)
             else
             {
                 fprintf(stdout,"\033[1;31m--> ERROR : [%s] is not an integer \033[0m\n",kjobinp[0]);
+        exit_fail=1;
+
                 break;
             }
             
@@ -112,6 +118,8 @@ void callingkjob(char *str)
             else
             {
                 fprintf(stdout,"\033[1;31m--> ERROR : [%s] is not an integer \033[0m\n",kjobinp[1]);
+        exit_fail=1;
+
                 break;
             }
         }
@@ -133,18 +141,24 @@ void callingkjob(char *str)
         if(pik<jnum)
         {
             fprintf(stdout,"\033[1;31m--> ERROR : job number does not exists\033[0m\n");
+        exit_fail=1;
+
             // exit(EXIT_FAILURE);
         }
         else{
             if(zcurpid==-1)
             {
                 fprintf(stdout,"\033[1;31m--> ERROR : you can not kill running shell\033[0m\n");
+        exit_fail=1;
+
                 exit(EXIT_FAILURE);
             }
             else{
                 if(kill(zcurpid,jsig)<0)
                 {
                     perror("kjob");
+        exit_fail=1;
+
                     // exit(EXIT_FAILURE);
                 }
                 if(jsig==9)
@@ -194,11 +208,15 @@ void callingfg(char *str)
     if(i<1)
     {
         fprintf(stdout,"\033[1;31m--> ERROR : to few arguments \033[0m\n");
+        exit_fail=1;
+
         exit(EXIT_FAILURE);
     }
     if(i>12)
     {
         fprintf(stdout,"\033[1;31m--> ERROR : too many arguments \033[0m\n");
+        exit_fail=1;
+
         exit(EXIT_FAILURE);
     }
     if(i==1)
@@ -215,6 +233,8 @@ void callingfg(char *str)
             else
             {
                 fprintf(stdout,"\033[1;31m--> ERROR : [%s] is not an integer \033[0m\n",fginp[0]);
+        exit_fail=1;
+
                 break;
             }
         }
@@ -235,6 +255,8 @@ void callingfg(char *str)
         if(pik<num)
         {
             fprintf(stdout,"\033[1;31m--> ERROR : job number does not exists\033[0m\n");
+        exit_fail=1;
+
         }
         else
         {
@@ -274,11 +296,15 @@ void callingbg(char *str){
     if(i<1)
     {
         fprintf(stdout,"\033[1;31m--> ERROR : to few arguments \033[0m\n");
+        exit_fail=1;
+
         // exit(EXIT_FAILURE);
     }
     else if(i>1)
     {
         fprintf(stdout,"\033[1;31m--> ERROR : too many arguments \033[0m\n");
+        exit_fail=1;
+
         // exit(EXIT_FAILURE);
     }
     else if(i==1)
@@ -295,6 +321,8 @@ void callingbg(char *str){
             else
             {
                 fprintf(stdout,"\033[1;31m--> ERROR : [%s] is not an integer \033[0m\n",bginp[0]);
+        exit_fail=1;
+
                 break;
             }
             
@@ -318,12 +346,16 @@ void callingbg(char *str){
         if(pik<num)
         {
             fprintf(stdout,"\033[1;31m--> ERROR : job number does not exists\033[0m\n");
+        exit_fail=1;
+
         }
         else
         {
             if(kill(zcurpid, SIGCONT)<0)
             {
                 perror("bg");
+        exit_fail=1;
+
             }
         }
     }

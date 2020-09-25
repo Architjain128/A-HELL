@@ -1,5 +1,16 @@
 #include "header.h"
 
+void handler_interrupt_c(int signum)
+{
+    char temp[200];
+    // char ok[100];
+    sprintf(temp,"\033[0;33m Process have been interrpted. Press any key to continue\033[0m\n");
+    write(1,temp,sizeof(temp));
+    // scanf("%s",ok);
+    while(getchar()!='\n');
+    getchar();
+
+}
 
 void handler(int sig)
 {
@@ -8,7 +19,7 @@ void handler(int sig)
 	char *exit=(char *)malloc(1024*(sizeof(char)));
 	char *exit_status=(char *)malloc(1024*(sizeof(char)));
 	pid=waitpid(-1,&st,WNOHANG);
-	sprintf(exit,"\n[%s] with pid [%d] exited ",back_pro[pid],pid);
+	sprintf(exit,"\n[%s] with pid [%d] exited \n",back_pro[pid],pid);
 	if(WIFEXITED(st))
 	{
 		int ab=WEXITSTATUS(st);
@@ -51,143 +62,65 @@ void callingcmd(char* str,int zip,char* str9)
     }
     inp[i]=NULL;
 
-if(bg==1)
-{
-    pid_t pid=fork();
-    
-    if (pid < 0) 
+    if(bg==1)
     {
-        perror("ERROR:");
-        return ;
-    }
-    if(pid==0)
-    {
-        // signal(SIGTTIN, SIG_IGN);
-        // signal(SIGTTOU, SIG_IGN);
-        // tcsetpgrp(STDIN_FILENO, pid);
-        if ( execvp(inp[0], inp) <0)
+        pid_t pid=fork();
+        
+        if (pid < 0) 
         {
-            fprintf(stderr,"command: %s, not found\n",inp[0] );
+            perror("ERROR:");
+            exit_fail=1;
             exit(0);
         }
-    
-        // signal(SIGTTIN, SIG_DFL);
-        // signal(SIGTTOU, SIG_DFL);
-    	
+        else if(pid==0)
+        {
+            if ( execvp(inp[0], inp) <0)
+            {
+                fprintf(stderr,"command: %s, not found\n",inp[0] );
+                exit_fail=1;
+                exit(0);
+            }
+        }
+        else
+        {
+            order[job_counter][0]=pid;
+            strcpy(back_pro[order[job_counter][0]],cum);
+            stat_pro[order[job_counter][0]] = 2;
+            order[job_counter][1] = -1;
+            job_counter++;
+        }
+        
     }
     else
     {
-     
-        order[job_counter][0]=pid;
-        strcpy(back_pro[order[job_counter][0]],cum);
-        stat_pro[order[job_counter][0]] = 2;
-        order[job_counter][1] = -1;
-        job_counter++;
-      
-    }
-    
-}
-else
-{
-    pid_t pid=fork();
-    
-    if (pid < 0) 
-    {
-        perror("ERROR:");
-        return ;
-    }
-    if(pid==0)
-    {
-        if ( execvp(inp[0], inp) < 0)
+        pid_t pid=fork();
+        
+        if (pid < 0) 
         {
-            fprintf(stderr,"command: %s, not found\n",inp[0] );
+            perror("ERROR:");
+            exit_fail=1;
             exit(0);
         }
-    	return ;
+        else if(pid==0)
+        {
+            signal(SIGINT,handler_interrupt_c);
+            if ( execvp(inp[0], inp) < 0)
+            {
+                fprintf(stderr,"command: %s, not found\n",inp[0] );
+                exit_fail=1;
+                exit(0);
+            }
+            return ;
+        }
+        else
+        {
+            cur_pid=pid;
+            order[job_counter][0]=pid;
+            strcpy(back_pro[order[job_counter][0]],cum);
+            stat_pro[order[job_counter][0]] = 1;
+            order[job_counter][1] = 1;
+            job_counter++;
+            waitpid(pid,&st,0);
+        }
     }
-    else
-    {
-        order[job_counter][0]=pid;
-        strcpy(back_pro[order[job_counter][0]],cum);
-        stat_pro[order[job_counter][0]] = 1;
-        order[job_counter][1] = 1;
-        job_counter++;
-       waitpid(pid,&st,0);
-
-    }
-    /*
-     fgPid = pid;
-                signal(SIGTTIN, SIG_IGN);
-                signal(SIGTTOU, SIG_IGN);
-                tcsetpgrp(STDIN_FILENO, pid);
-                waitpid(pid, &status, WUNTRACED);
-                if (WIFSTOPPED(status))
-                {
-                    char stringToAdd[500];
-                    strcpy(stringToAdd, Commands[currCommand].command);
-                    strcat(stringToAdd, " ");
-                    for (int i = 0; i < Commands[currCommand].flagsIndex; i++)
-                    {
-                        strcat(stringToAdd, Commands[currCommand].flags[i]);
-                        strcat(stringToAdd, " ");
-                    }
-
-                    for (int i = 0; i < Commands[currCommand].argumentsIndex; i++)
-                    {
-                        strcat(stringToAdd, Commands[currCommand].arguments[i]);
-                        strcat(stringToAdd, " ");
-                    }
-                    addJob(pid, stringToAdd);
-                }
-                tcsetpgrp(STDIN_FILENO, getpgrp());
-                signal(SIGTTIN, SIG_DFL);
-                signal(SIGTTOU, SIG_DFL);
-
-                fgPid = 0;
-     */
-}
-
-    // if(bg==0) 
-    // {
-    // 	cur_pid=pid;
-    //  	bg_processes[pid]=helper;
-    // 	// signal(SIGTSTP,zhandler);
-    //     waitpid (pid, &st, WUNTRACED);
-    // }
-    // else
-    // {
-    // 	if(strcmp(inp[0],"vi")==0)	
-    //     proc_status[pid]=2;
-    // 	else 	
-    //     proc_status[pid]=1;
-    // 	bg_processes[pid]=inp[0];
-    //     printf("%s %d\n",bg_processes[pid],pid);
-    // }
-    // int Rfork=fork();
-    // if(bg==1)
-    // {
-    //    if(Rfork==0)
-	// 	{
-	// 		if(execvp(inp[0],inp)<0)
-	// 		{
-	// 			fprintf(stdout,"\033[1;31m--> ERROR : command not found [ %s ]\033[0m\n",helper);
-	// 			exit(0);
-	// 		}
-	// 	}
-    // }
-    // else
-    // {
-    //     if(Rfork==0)
-	// 	{
-	// 		if(execvp(inp[0],inp)<0)
-	// 		{
-	// 			fprintf(stdout,"\033[1;31m--> ERROR : command not found [ %s ]\033[0m\n",helper);
-	// 			exit(0);	
-	// 		}
-	// 	}
-	// 	else
-	// 	{
-	// 		waitpid(Rfork,&status,0);
-	// 	}
-    // }
 }

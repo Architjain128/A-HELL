@@ -13,6 +13,7 @@ void addhistory(char *str,char *str1)
     if(hp<0)
     {
        fprintf(stdout,"\033[1;31m--> ERROR :cannot open history.txt\033[0m\n");
+        exit_fail=1;
         return;
     }
       ll ctount=0;
@@ -75,6 +76,8 @@ void callinghistory(char *str,int zip,char *str1){
     if(hp<0)
     {
        fprintf(stdout,"\033[1;31m--> ERROR :cannot open history.txt\033[0m\n");
+        exit_fail=1;
+
         return;
     }
 

@@ -2,16 +2,14 @@
 
 void callingecho(char *str,int zip, char *str1)
 {
-    char *temp;
-    temp=(char *)malloc(100000*sizeof(char));
-    ll po=0;
-    for(ll o=zip;o<strlen(str);o++)
+    char *temp2=(char *)malloc(1024*(sizeof(char)));
+    temp2 = strtok(str, " \t");
+    while( temp2 != NULL ) 
     {
-        temp[po]=str[o];
-        po++;
+        if(strcmp(temp2,"echo")!=0)
+        printf("%s ",temp2);
+        temp2 = strtok(NULL, " \t");
     }
-    temp[po]='\0';
-
-    fprintf(stdout,"%s\n",temp);
-    free(temp);
+    printf("\n");
+    free(temp2);
 }

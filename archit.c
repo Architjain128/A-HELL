@@ -1,5 +1,6 @@
 #include "header.h"
 #include "prompt.h"
+char *ex_st[]={":')",":'("};
 
 ll popwer(ll a,ll b)
 {
@@ -25,6 +26,26 @@ void exitmsg()
 void handler_exit(int sig){
     exitmsg();
     exit(0); 
+}
+void handler_fbgs_z(int signum)
+{
+    printf("kjwdbvkdn");
+    if(cur_pid>0)
+    {
+        kill(cur_pid,9);
+        stat_pro[cur_pid]=2;
+    }
+}
+void handler_ignore_c(int sig)
+{
+    // char temp[200];
+    // // char ok[100];
+    // sprintf(temp,"\033[0;33m Process have been interrpted. Press any key to continue\033[0m\n");
+    // write(1,temp,sizeof(temp));
+    // // scanf("%s",ok);
+    // while(getchar()!='\n');
+    // getchar();
+    return;
 }
 
 #include "pwd.h"
@@ -52,11 +73,14 @@ int main()
 {
     system("clear");
     // signal(SIGTERM,handler_exit);
-    // signal(SIGTSTP, d_handler);
+    // signal(SIGTSTP, handler_fbgs_z);
+    // signal(SIGINT, handler_ignore_c);
     stdin_fd = dup(STDIN_FILENO);
     stderr_fd = dup(STDERR_FILENO);
     stdout_fd = dup(STDOUT_FILENO); 
     job_counter=0;
+    exit_fail=0;
+    cur_pid=-1;
     order[job_counter][0]=getpid();
     stat_pro[order[job_counter][0]]=1;
     order[job_counter][1]=0;
@@ -75,11 +99,13 @@ int main()
             zpipp++;
         }
         prompt_pathy();
-        sprintf(dis, "<\033[1;32m%s\033[0m@\033[1;32m%s\033[0m:\033[1;34m%s\033[0m> ",user,host,dir);
+        sprintf(dis, "%s<\033[1;32m%s\033[0m@\033[1;32m%s\033[0m:\033[1;34m%s\033[0m> ",ex_st[exit_fail],user,host,dir);
         fprintf(stdout,"%s",dis);
         fflush(stdout);
 
         // strcpy(a," \0");
+        exit_fail=0;
+        cur_pid=-1;
         fgets(a,sizeof(a),stdin);
         a[strlen(a)-1]='\0';
         // scanf("%[^\n]s",a);
@@ -134,7 +160,6 @@ int main()
                 {
                     printf("remain\n");
                     callingpiponly(amd);
-
                 }
 
 
