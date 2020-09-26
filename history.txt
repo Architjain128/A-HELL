@@ -1,20 +1,20 @@
-e
-e
-evi
-ev
-e
-e
-ev
-e
-e
-evince
+cat < in.txt | grep new
+cat < in.txt | grep new
+exit
+cat < in.txt | grep new
+cat in.txt | grep new
+cat < in.txt | grep new
+cat < in.txt | grep new
+cat in.txt | grep new
+cat < in.txt | grep new
+cat < in.txt | grep new | wc > ou.txt
 ls
+ls < in.txt | cat < in.txt > out.txt | wc >> ou.txt
+ls > in.txt | cat < in.txt > ou.txt | wc >> ou.txt
+ls > in.txt 
+cat < in.txt > ou.txt
+cat in.txt | wc >> ou.txt
+cat < in.txt | wc >> ou.txt
+evince 
 evince
-evince
-evince &
-exit
-exit
-evince
-exit
-evince
-exit
+

@@ -25,14 +25,25 @@ void exitmsg()
     printf("\033[1;34m<<==============================================================>>\033[0m\n");
     // exit(0);
 }
+void cinhand(int signum)
+{
 
+    if(cur_pid>0 && getpid()!=sh)
+    {
+        signal(SIGINT,SIG_IGN);
+    }
+    else
+    {
+        return;
+    }
+    
+}
 void zhand(int signum)
 {
-    fprintf(stderr,"zz");
-    if(cur_pid>0)
+    if(cur_pid>0 && getpid()!=sh)
     {
         fprintf(stderr,"864z");
-        if(kill(cur_pid,9)<0)
+        if(kill(cur_pid,SIGTSTP)<0)
         {
             perror("Cannot kill by ^C ");
         }
@@ -40,13 +51,13 @@ void zhand(int signum)
         {
             stat_pro[cur_pid]=2;
             char temp[100];
-            sprintf(temp," Foregroung process with pid %d has been stopped and sent in background\n",cur_pid);
+            sprintf(temp," Foreground process with pid %d has been stopped and sent in background\n",cur_pid);
             write(STDOUT_FILENO,temp,sizeof(temp));
         }
     }
     else
     {
-    fprintf(stderr,"no");
+    fprintf(stderr,"nothing");
         return;
     }
 }
@@ -57,6 +68,7 @@ void zhand(int signum)
 #include "ls.h"
 #include "cmd.h"
 #include "redi.h"
+#include "ppp.h"
 #include "pipe.h"
 #include "pinfo.h"
 #include "env.h"
@@ -86,19 +98,7 @@ void zhand(int signum)
 //     } 
 // }
 
-void cinhand(int signum)
-{
 
-    if(cur_pid>0 && getpid()!=sh)
-    {
-        signal(SIGINT,SIG_IGN);
-    }
-    else
-    {
-        return;
-    }
-    
-}
 typedef long long int ll;
 int zpipp=0;
 int main()
@@ -146,7 +146,8 @@ int main()
         strcpy(a,"");
         fgets(a,sizeof(a),stdin);
         a[strlen(a)-1]='\0';
-
+        
+       
     
         if (a == NULL) {
             printf("Shell is exited due to ctrl+D\n");  /* Exit on Ctrl-D */
@@ -219,7 +220,7 @@ int main()
                 }
                 else if(fu_redi!=0 && fu_pipe!=0)
                 {
-                    printf("remain\n");
+                    // printf("remain\n");
                     callingpiponly(amd);
                 }
 

@@ -43,4 +43,13 @@ char back_pro[40000][1000];
 int stat_pro[40000];
 int exit_fail;
 int cur_pid;
+int inpp;
+int oupp;
+char *tasks[10000];
+char *runtask[100];
+char inp_file[10000];
+char out_file[10000];
+char dd[10000];
+int out_type;
+
 #endif
