@@ -1,7 +1,7 @@
 #include "header.h"
 #include "prompt.h"
 int sh;
-char *ex_st[]={":')",":'("};
+char *ex_st[]={"✔️  :')","❌ :'("};
 
 ll popwer(ll a,ll b)
 {
@@ -13,16 +13,17 @@ ll popwer(ll a,ll b)
 void msg()
 {
     printf("\033[1;34m\n<<==============================================================>>\033[0m\n");
-    printf("\033[1;31m                    👿 WELCOME IN A-HELL 👿\n");
+    printf("\033[1;31m                    😈 WELCOME IN A-HELL 😈\n");
     printf("\033[0;31m                                 - created by Archit Jain\n");
     printf("\033[1;34m<<==============================================================>>\033[0m\n");
 }
 void exitmsg()
 {
     printf("\n\033[1;34m<<==============================================================>>\033[0m\n");
-    printf("\033[1;31m                      OH HELL NO ヾ(*д*)ﾉ\n");
+    printf("\033[1;31m                       OH HELL NO 👿\n");
     printf("\033[0;31m                         BYE !!!\n");
     printf("\033[1;34m<<==============================================================>>\033[0m\n");
+    // exit(0);
 }
 
 void zhand(int signum)
@@ -134,7 +135,7 @@ int main()
             zpipp++;
         }
         prompt_pathy();
-        sprintf(dis, "%s<\033[1;32m%s\033[0m@\033[1;32m%s\033[0m:\033[1;34m%s\033[0m> ",ex_st[exit_fail],user,host,dir);
+        sprintf(dis, "%s <\033[1;32m%s\033[0m@\033[1;32m%s\033[0m:\033[1;34m%s\033[0m> ",ex_st[exit_fail],user,host,dir);
         fprintf(stdout,"%s",dis);
         fflush(stdout);
 
@@ -150,7 +151,7 @@ int main()
         if (a == NULL) {
             printf("Shell is exited due to ctrl+D\n");  /* Exit on Ctrl-D */
             exitmsg();
-            exit(0);
+            break;
         }
         ll ctd=1;
         for (ll i = 0; i < strlen(a); i++)
