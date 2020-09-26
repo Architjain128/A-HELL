@@ -2,8 +2,6 @@
 
 void callingjobs(){
     ll j=0;
-	// char * s = "stopped";
-	// char * r = "running";
     for (ll i=0;i<job_counter;i++)
     {
         if(order[i][1]==0)
@@ -77,14 +75,11 @@ void callingkjob(char *str)
         fprintf(stdout,"\033[1;31m--> ERROR : to few arguments \033[0m\n");
         exit_fail=1;
 
-        exit(EXIT_FAILURE);
     }
     if(i>2)
     {
         fprintf(stdout,"\033[1;31m--> ERROR : too many arguments \033[0m\n");
         exit_fail=1;
-
-        exit(EXIT_FAILURE);
     }
     if(i==2)
     {
@@ -151,7 +146,7 @@ void callingkjob(char *str)
                 fprintf(stdout,"\033[1;31m--> ERROR : you can not kill running shell\033[0m\n");
         exit_fail=1;
 
-                exit(EXIT_FAILURE);
+                // exit(EXIT_FAILURE);
             }
             else{
                 if(kill(zcurpid,jsig)<0)
@@ -210,14 +205,14 @@ void callingfg(char *str)
         fprintf(stdout,"\033[1;31m--> ERROR : to few arguments \033[0m\n");
         exit_fail=1;
 
-        exit(EXIT_FAILURE);
+        // exit(EXIT_FAILURE);
     }
     if(i>12)
     {
         fprintf(stdout,"\033[1;31m--> ERROR : too many arguments \033[0m\n");
         exit_fail=1;
 
-        exit(EXIT_FAILURE);
+        // exit(EXIT_FAILURE);
     }
     if(i==1)
     {
@@ -269,6 +264,7 @@ void callingfg(char *str)
 			}
 			else
 			{
+                cur_pid=zcurpid;
 				kill(zcurpid,SIGCONT);
                 stat_pro[zcurpid]=0;
 				waitpid(-1,NULL,WUNTRACED);
@@ -321,7 +317,7 @@ void callingbg(char *str){
             else
             {
                 fprintf(stdout,"\033[1;31m--> ERROR : [%s] is not an integer \033[0m\n",bginp[0]);
-        exit_fail=1;
+                exit_fail=1;
 
                 break;
             }
@@ -354,8 +350,7 @@ void callingbg(char *str){
             if(kill(zcurpid, SIGCONT)<0)
             {
                 perror("bg");
-        exit_fail=1;
-
+                exit_fail=1;
             }
         }
     }

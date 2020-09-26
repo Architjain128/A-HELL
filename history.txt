@@ -1,20 +1,20 @@
-cd archit/Desktop
-cd -
-cd -
+e
+e
+evi
+ev
+e
+e
+ev
+e
+e
+evince
 ls
-make clean
-ls
-git add.
-git add .
-git commit -m "b2"
-git push origin pi -f
-git branch
+evince
+evince
 evince &
-evince &
-jobs 
-fg 2
-jobs
-bg 2
-bg 1
-fg 2
-fg 
+exit
+exit
+evince
+exit
+evince
+exit

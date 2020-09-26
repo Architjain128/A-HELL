@@ -14,7 +14,9 @@
 + exit/quit
 + foreground commands
 + background commands with exit status
-+ 
++ redirection only
++ piping only
++ piping + redirection  **'pending'**
 + setenv
 + unsetenv
 + jobs
@@ -23,6 +25,10 @@
 + bg
 + overkill
 
+- Signal Detection
+    * Ctrl+Z  : stopped foreground and send it in background **'pending'**
+    * Ctrl+C  : kill any foreground process
+    * Ctrl+D  : exit shell (EOF)
 
 - BONUS COMMANDS
     + history
@@ -39,7 +45,7 @@
 
 ## Modular Explaination
 + C files
-    + archit.c    : main 
+    + archit.c    : main + exiting shell(quit | exit | EOF(Ctrl+D)) + signals ( Ctrl+C , Ctrl+Z )
     + prompt.c    : codes for printing prompt
     + cd.c        : codes for cd command
     + echo.c      : codes for echo command
@@ -53,6 +59,7 @@
     + piponly.c : code for pipeonly commands only(SP2)
     + env.c     : new cmds (setenv,unsetenv)
     + jobs.c : new cmds (jobs,kjob,fg,bg,overkill)
+
 
 + Header file
     + header.h

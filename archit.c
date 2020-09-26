@@ -1,5 +1,6 @@
 #include "header.h"
 #include "prompt.h"
+int sh;
 char *ex_st[]={":')",":'("};
 
 ll popwer(ll a,ll b)
@@ -12,40 +13,41 @@ ll popwer(ll a,ll b)
 void msg()
 {
     printf("\033[1;34m\n<<==============================================================>>\033[0m\n");
-    printf("\033[1;31m                     WELCOME IN A-HELL\n");
-    printf("\033[0;31m                                - created by Archit Jain\n");
+    printf("\033[1;31m                    👿 WELCOME IN A-HELL 👿\n");
+    printf("\033[0;31m                                 - created by Archit Jain\n");
     printf("\033[1;34m<<==============================================================>>\033[0m\n");
 }
 void exitmsg()
 {
-    printf("\n\033[1;34m<<==============================================================>>\033[0m\n");
-    printf("\033[1;31m                     OH HELL NO :(\n");
+    printf("\033[1;34m<<==============================================================>>\033[0m\n");
+    printf("\033[1;31m                      OH HELL NO ヾ(*д*)ﾉ\n");
     printf("\033[0;31m                         BYE !!!\n");
     printf("\033[1;34m<<==============================================================>>\033[0m\n");
 }
-void handler_exit(int sig){
-    exitmsg();
-    exit(0); 
-}
-void handler_fbgs_z(int signum)
+
+void zhand(int signum)
 {
-    printf("kjwdbvkdn");
+    fprintf(stderr,"zz");
     if(cur_pid>0)
     {
-        kill(cur_pid,9);
-        stat_pro[cur_pid]=2;
+        fprintf(stderr,"864z");
+        if(kill(cur_pid,9)<0)
+        {
+            perror("Cannot kill by ^C ");
+        }
+        else
+        {
+            stat_pro[cur_pid]=2;
+            char temp[100];
+            sprintf(temp," Foregroung process with pid %d has been stopped and sent in background\n",cur_pid);
+            write(STDOUT_FILENO,temp,sizeof(temp));
+        }
     }
-}
-void handler_ignore_c(int sig)
-{
-    // char temp[200];
-    // // char ok[100];
-    // sprintf(temp,"\033[0;33m Process have been interrpted. Press any key to continue\033[0m\n");
-    // write(1,temp,sizeof(temp));
-    // // scanf("%s",ok);
-    // while(getchar()!='\n');
-    // getchar();
-    return;
+    else
+    {
+    fprintf(stderr,"no");
+        return;
+    }
 }
 
 #include "pwd.h"
@@ -58,23 +60,51 @@ void handler_ignore_c(int sig)
 #include "pinfo.h"
 #include "env.h"
 #include "jobs.h"
-// #include "piponly.h"
 #include "history.h"
 #include "nightwatch.h"
-void d_handler(int signum)
+
+// void chand(int signum)
+// {
+//     if(cur_pid>0)
+//     {
+//         if(kill(cur_pid,9)<0)
+//         {
+//             perror("Cannot kill by ^C ");
+//         }
+//         else
+//         {
+//             stat_pro[cur_pid]=2;
+//             char temp[100];
+//             sprintf(temp," Foregroung process with pid %d has been stopped and sent in background\n",cur_pid);
+//             write(STDOUT_FILENO,temp,sizeof(temp));
+//         }    
+//     }
+//     else
+//     {
+//         return;
+//     } 
+// }
+
+void cinhand(int signum)
 {
-    exitmsg();
-    exit(0);
-    // return;
+
+    if(cur_pid>0 && getpid()!=sh)
+    {
+        signal(SIGINT,SIG_IGN);
+    }
+    else
+    {
+        return;
+    }
+    
 }
 typedef long long int ll;
 int zpipp=0;
 int main()
 {
     system("clear");
+    sh=getpid();
     // signal(SIGTERM,handler_exit);
-    // signal(SIGTSTP, handler_fbgs_z);
-    // signal(SIGINT, handler_ignore_c);
     stdin_fd = dup(STDIN_FILENO);
     stderr_fd = dup(STDERR_FILENO);
     stdout_fd = dup(STDOUT_FILENO); 
@@ -91,6 +121,11 @@ int main()
     prompt_init();
     while(1)
     {
+
+    signal(SIGTSTP,zhand);
+    signal(SIGINT, cinhand);
+
+
         strcpy(predir,curdir);
         getcwd(curdir,sizeof(curdir));
         if(zpipp==0)
@@ -103,11 +138,36 @@ int main()
         fprintf(stdout,"%s",dis);
         fflush(stdout);
 
+        
         // strcpy(a," \0");
         exit_fail=0;
         cur_pid=-1;
+        strcpy(a,"");
         fgets(a,sizeof(a),stdin);
         a[strlen(a)-1]='\0';
+
+    
+        if (a == NULL) {
+            printf("Shell is exited due to ctrl+D\n");  /* Exit on Ctrl-D */
+            exitmsg();
+            exit(0);
+        }
+        ll ctd=1;
+        for (ll i = 0; i < strlen(a); i++)
+        {
+            if(a[1]!=' '|| a[i]!='\0')
+            {
+                ctd=0;
+                break;
+            }
+        }
+        
+        if(ctd==1)
+        {
+            exitmsg();
+            exit(0);
+        }
+
         // scanf("%[^\n]s",a);
         addhistory(a,execut);
 
