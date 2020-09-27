@@ -1,6 +1,4 @@
 cd .. ; ls -al
-cd .. ; ls -al
-cd .. ; ls -al
 cd .. ; ls -al 
 cd .. ; ls -al ;
 cd ~
@@ -18,3 +16,5 @@ ls D @ echo hi
 ls D $ echo no
 ls D @ echo no
 ls D @ echo no
+ls @ echo hi
+ls $ echo hi
