@@ -70,6 +70,7 @@ void zhand(int signum)
 #include "redi.h"
 #include "ppp.h"
 #include "pipe.h"
+#include "boom.h"
 #include "pinfo.h"
 #include "env.h"
 #include "jobs.h"
@@ -185,6 +186,7 @@ int main()
         ll pop=0;
         ll fu_pipe=0;
         ll fu_redi=0;
+        ll fu_boom=0;
         while( pop<=ink ) 
         {
             ll pin=0;
@@ -200,16 +202,25 @@ int main()
             }
                 fu_pipe=0;
                 fu_redi=0;
+                fu_boom=0;
                 for(ll xi=0;xi<strlen(amd);xi++)
                 {
                     if(amd[xi]=='|')
                     fu_pipe++;
                     if(amd[xi]=='<' || amd[xi]=='>')
                     fu_redi++;
+                    if(amd[xi]=='@' || amd[xi]=='$')
+                    fu_boom++;
+
                 }
 
 
-                if(fu_pipe!=0 && fu_redi==0)
+                if(fu_boom!=0)
+                {
+                    callingboom(amd);
+                }
+
+                else if(fu_pipe!=0 && fu_redi==0)
                 {
                     callingpiponly(amd);
                 }
