@@ -1,4 +1,20 @@
 #include "header.h"
+void callingpwd();
+void callingcd(char *str,int zip, char *str1);
+void callingecho(char *str,int zip, char *str1);
+void callingls(char *str,int zip, char *str1);
+void callingpinfo(char *str,int zip, char *str1);
+void callinghistory(char *str,int zip, char *str1);
+void callingcmd(char *str,int zip, char *str1);
+void nightwatch(char *str, char *str1);
+void callingsetenv(char *str);
+void callingunsetenv(char *str);
+void callingfg(char *str);
+void callingbg(char *str);
+void callingjobs();
+void callingoverkill();
+void callingkjob(char *str);
+void exitmsg();
 void callingredi_num();
 
 void getcm(ll a)
@@ -10,6 +26,7 @@ void getcm(ll a)
     ll temp_flag_out=0;
     ll temp_flag_outappen=0;
     ll temp_kick=0;
+    strcpy(restr,"");
     strcpy(inp_file,"");
     strcpy(out_file,"");
     out_type=0;
@@ -57,6 +74,8 @@ void getcm(ll a)
             if(temp_kick==0)
             {
                 runtask[j]=totken;
+                strcat(restr,totken);
+                strcat(restr," ");
                 j++;
             }
         }
@@ -97,37 +116,37 @@ void callingpiponly(char *str)
     while(hi<=num_pipe) 
     {
         getcm(hi);
-        strcpy(dd,"");
+        strcpy(restr,"");
         ll x=0;
         while (runtask[x]!=NULL)
         {
             // printf("[%s]+",runtask[x]);
-            strcat(dd,runtask[x]);
-            strcat(dd," ");
+            strcat(restr,runtask[x]);
+            strcat(restr," ");
             x++;
         }
 
         if(strlen(inp_file)!=0)
         {
-            strcat(dd,"< ");
-            strcat(dd,inp_file);
+            strcat(restr,"< ");
+            strcat(restr,inp_file);
             // printf("input_file [%s]\n",inp_file);
         }
          if(strlen(out_file)!=0)
         {
             if(out_type==1)
             {
-                strcat(dd,"> ");
-            strcat(dd,out_file);
+                strcat(restr,"> ");
+            strcat(restr,out_file);
             // printf("input_file [%s]\n",inp_file);
             }
             if(out_type==2)
             {
-                strcat(dd,">> ");
-                strcat(dd,out_file);
+                strcat(restr,">> ");
+                strcat(restr,out_file);
             }
         }
-        // printf("\n\n[%s]\n\n",dd);
+        // printf("\n\n[%s]\n\n",restr);
         // printf("output_file [%s]\n",out_file);
         // printf("output_type [%d]\n",out_type);
         // printf("\n");   
@@ -166,12 +185,80 @@ void callingpiponly(char *str)
                     close(pipefds[i]);
             }
 
+
+
             if(inpp>0 || oupp>0)
             {
                 callingredi_num();
             }
             else
             {
+                // fprintf(stderr,"[%s]",runtask[0]);
+                // if(strcmp(runtask[0],"pwd")==0)
+                // {
+                //     callingpwd();
+                // }
+                // else if(strcmp(runtask[0],"cd")==0)
+                // {
+                //     callingcd(restr,0,execut);
+                // }
+                // else if(strcmp(runtask[0],"echo")==0)
+                // {
+                //     callingecho(str,0,execut);
+                // }
+                // else if(strcmp(runtask[0],"ls")==0)
+                // {
+                //     callingls(restr,0,execut);
+                // }
+                // else if(strcmp(runtask[0],"pinfo")==0)
+                // {
+                //     callingpinfo(restr,0,execut);
+                // }
+                // else if(strcmp(runtask[0],"history")==0)
+                // {
+                //     callinghistory(restr,0,execut);
+                // }
+                // else if(strcmp(runtask[0],"nightswatch")==0)
+                // {
+                //     nightwatch(restr,execut);
+                // }
+                // else if(strcmp(runtask[0],"setenv")==0)
+                // {
+                //     callingsetenv(restr);
+                // }
+                // else if(strcmp(runtask[0],"unsetenv")==0)
+                // {
+                //     callingunsetenv(restr);
+                // }
+                // else if(strcmp(runtask[0],"jobs")==0)
+                // {
+                //     callingjobs();
+                // }
+                // else if(strcmp(runtask[0],"kjob")==0)
+                // {
+                //     callingkjob(restr);
+                // }
+                // else if(strcmp(runtask[0],"overkill")==0)
+                // {
+                //     callingoverkill();
+                // }
+                // else if(strcmp(runtask[0],"fg")==0)
+                // {
+                //     callingfg(restr);
+                // }
+                // else if(strcmp(runtask[0],"bg")==0)
+                // {
+                //     callingbg(restr);
+                // }
+                // else if(strcmp(runtask[0],"exit")==0 || strcmp(runtask[0],"quit")==0)
+                // {
+                //     exitmsg();
+                //         exit(0); 
+                // }
+                // else
+                // {
+                //     callingcmd(restr,0,execut);
+                // }
                 if( execvp(runtask[0], runtask) < 0 )
                 {
                     perror("oops");
@@ -179,8 +266,9 @@ void callingpiponly(char *str)
                     // exit(EXIT_FAILURE);
                 }
             }
-            exit(0);          
+            return;         
         }
+        
        
         hi++;
         j+=2;

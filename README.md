@@ -2,8 +2,11 @@
 
 ## How to run
     run following commands in terminal
-    ->  make
-    -> ./A-Hell
+        ->  make
+        -> ./A-Hell
+
+    to remove objectfiles 
+        -> make clean
 
 ## Features
 + pwd 
@@ -16,7 +19,7 @@
 + background commands with exit status
 + redirection only
 + piping only
-+ piping + redirection  **'pending'**
++ piping + redirection 
 + setenv
 + unsetenv
 + jobs
@@ -26,9 +29,9 @@
 + overkill
 
 - Signal Detection
-    * Ctrl+Z  : stopped foreground and send it in background **'pending'**
+    * Ctrl+Z  : stopped foreground and send it in background  `pending`
     * Ctrl+C  : kill any foreground process
-    * Ctrl+D  : exit shell (EOF)
+    * Ctrl+D  : exit shell (EOF)  `faulty`
 
 - BONUS COMMANDS
     + history
@@ -37,6 +40,7 @@
         + nerborn
     + last dir : assuming that in starting of shell lastdir = executable address (till directory changes)
     + exit status 
+    + chaining commands 
 
 - EXTRA COMMANDS
     + to clear the terminal screen by system("cls")
@@ -82,8 +86,8 @@
 * Except all are useless in hell 
 
 ## ASSUMPTIONS
-+ I have completed all 3 bonus parts 
-+ ls cmd has flags -a,-l,-al,-la (another cmd **la < dir >** is made as a alias for ls -la )
++ Outputs of all internal processes can redirected to a file but inputs cannot 
++ In piping, pipine+redirection and chaining we use don't use internal commands
 + WARNING status in yellow colour if cmd has extra arguments, then the ouput will be for minimal( default with no flags ) cmd
 + ERROR status in red colour if cmd is facing error with corresponding error 
 + added colours in prompt to deffrentiate it by other
@@ -91,8 +95,7 @@
 
 ## POSSIBLE ERRORS
 + printing of prompt twice when q+enter is pressed in nightswatch (one for q+enter and other for next command ig!code)
-+ their is problem in strtok function it is not working as wanted (don't know why? working fine and submitted 2 days earlier to deadline but found on last day; this was also discussed by two Ta but i can't sort it)
-+ they are working fine when one command is entered at a time it is breaking **cd Desktop/** to **cd** and **Desk** or any other subsequence <br/><br/>
++ their is problem in strtok function it is not working as wanted (don't know why? working fine and submitted 2 days earlier to deadline but found on last day; this was also discussed by two Ta but i can't sort it) they are working fine when one command is entered at a time it is breaking **cd Desktop/** to **cd** and **Desk** or any other subsequence <br/><br/>
 <img src="./sub.jpeg" width="400">
       
 

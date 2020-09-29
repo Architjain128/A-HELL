@@ -19,7 +19,6 @@ int lasthistory(char *str)
     if (c == '\n') 
     ctount ++;
 
-    ll ct_dash=0;
     char okokok[1000];
     char s[1000];
     strcpy(okokok,"");

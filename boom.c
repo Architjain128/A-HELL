@@ -40,7 +40,7 @@ for (ll i = 0,j=0; i < strlen(str); i++)
         totken = strtok(NULL, boomdelimiters);
     }
     ll boom_cmd=i;
-    ll z=0;
+
     for (ll i = 0; i < boom_cmd; i++)
     {
         sym_exit[i]=0;

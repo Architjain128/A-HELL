@@ -55,5 +55,6 @@ char inp_file[10000];
 char out_file[10000];
 char dd[10000];
 int out_type;
+char restr[10000];
 
 #endif

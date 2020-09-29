@@ -67,8 +67,6 @@ void zhand(int signum)
 #include "echo.h"
 #include "ls.h"
 #include "cmd.h"
-#include "redi.h"
-#include "ppp.h"
 #include "pipe.h"
 #include "boom.h"
 #include "pinfo.h"
@@ -76,7 +74,8 @@ void zhand(int signum)
 #include "jobs.h"
 #include "history.h"
 #include "nightwatch.h"
-
+#include "redi.h"
+#include "ppp.h"
 // void chand(int signum)
 // {
 //     if(cur_pid>0)
@@ -222,21 +221,14 @@ int main()
                     callingboom(amd);
                 }
 
-                else if(fu_pipe!=0 && fu_redi==0)
+                else if(fu_pipe!=0)
                 {
                     callingpiponly(amd);
                 }
-                else if(fu_redi!=0 && fu_pipe==0)
+                else if(fu_redi!=0)
                 {
                     callingredi(amd);
-
                 }
-                else if(fu_redi!=0 && fu_pipe!=0)
-                {
-                    // printf("remain\n");
-                    callingpiponly(amd);
-                }
-
 
             // pwd 
             else if(amd[pin]=='p' && amd[pin+1]=='w' && amd[pin+2]=='d')

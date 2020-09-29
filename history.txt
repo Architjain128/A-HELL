@@ -1,20 +1,20 @@
-jj
-jj
-jk
-jk
-j
-l
-cd ..
-cd ~
-cd -
-evince 
-cd ..
+ls -al > in.txt | wc
+ls -al > in.txt | wc < in.txt
+ls -al | wc 
+wc < in.txt
+ls -al | wc
+ls | echo hi
+ls -al
+ls | echo hi
+ls > in.txt | echo hi
+ls | wc
+ls > in.txt | echo hi
+ls -al > in.txt | echo hi
+ls -al | wc
+ls -al > in.txt | wc
+ls -al | wc < in.txt
+ls -al | wc in.txt
+echo "iakjbw   jbrlvo         lbrvjr    rkjv rk k " > in.txt
+wc in.txt
 ls
-sl
-  
-evince 
-pwd > in.txt
-pwd
-pwd > ou.txt
-ls -al > ou.txt
-echo "kk" >> ou.txt
+make clean

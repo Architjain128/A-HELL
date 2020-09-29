@@ -1,8 +1,20 @@
 #include "header.h"
 void callingpwd();
-void callingcd();
-void callingecho();
-void callingls();
+void callingcd(char *str,int zip, char *str1);
+void callingecho(char *str,int zip, char *str1);
+void callingls(char *str,int zip, char *str1);
+void callingpinfo(char *str,int zip, char *str1);
+void callinghistory(char *str,int zip, char *str1);
+void callingcmd(char *str,int zip, char *str1);
+void nightwatch(char *str, char *str1);
+void callingsetenv(char *str);
+void callingunsetenv(char *str);
+void callingfg(char *str);
+void callingbg(char *str);
+void callingjobs();
+void callingoverkill();
+void callingkjob(char *str);
+void exitmsg();
 
 
 void callingredi(char *str)
@@ -30,7 +42,6 @@ void callingredi(char *str)
         ll i=0;
         ll j=0;
         char *reruntask[100];
-        char restr[10000];
         char inp_file[1000];
         char out_file[1000];
         int out_type;
@@ -188,13 +199,61 @@ void callingredi(char *str)
             {
                 callingls(restr,0,execut);
             }
-            else if(execvp(reruntask[0],reruntask)<0)
+            else if(strcmp(reruntask[0],"pinfo")==0)
             {
-                perror("command not found");
-                exit_fail=1;
-
-                exit(0);
+                callingpinfo(restr,0,execut);
             }
+            else if(strcmp(reruntask[0],"history")==0)
+            {
+                callinghistory(restr,0,execut);
+            }
+            else if(strcmp(reruntask[0],"nightswatch")==0)
+            {
+                nightwatch(restr,execut);
+            }
+            else if(strcmp(reruntask[0],"setenv")==0)
+            {
+                callingsetenv(restr);
+            }
+            else if(strcmp(reruntask[0],"unsetenv")==0)
+            {
+                callingunsetenv(restr);
+            }
+            else if(strcmp(reruntask[0],"jobs")==0)
+            {
+                callingjobs();
+            }
+            else if(strcmp(reruntask[0],"kjob")==0)
+            {
+                callingkjob(restr);
+            }
+            else if(strcmp(reruntask[0],"overkill")==0)
+            {
+                callingoverkill();
+            }
+            else if(strcmp(reruntask[0],"fg")==0)
+            {
+                callingfg(restr);
+            }
+            else if(strcmp(reruntask[0],"bg")==0)
+            {
+                callingbg(restr);
+            }
+            else if(strcmp(reruntask[0],"exit")==0 || strcmp(reruntask[0],"quit")==0)
+            {
+                  exitmsg();
+                    exit(0); 
+            }
+            else
+            {
+                callingcmd(restr,0,execut);
+            }
+            // else if(execvp(reruntask[0],reruntask)<0)
+            // {
+            //     perror("command not found");
+            //     exit_fail=1;
+            //     exit(0);
+            // }
             exit(0);
         }
         else
@@ -203,15 +262,12 @@ void callingredi(char *str)
             if(dup2(stdout_fd,STDOUT_FILENO)<0)
             {
                 perror("reassign sdtout");
-        exit_fail=1;
-
+                exit_fail=1;
             }
             if(dup2(stdin_fd,STDIN_FILENO)<0)
             {
                 perror("reassign STDIN_FILENO");
-        exit_fail=1;
-
+                exit_fail=1;
             } 
-
         }    
 }
