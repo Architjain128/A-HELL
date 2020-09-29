@@ -57,7 +57,7 @@ void zhand(int signum)
     }
     else
     {
-    fprintf(stderr,"nothing");
+     fprintf(stderr,"nothing");
         return;
     }
 }
@@ -153,12 +153,13 @@ int main()
         if (a == NULL) {
             printf("Shell is exited due to ctrl+D\n");  /* Exit on Ctrl-D */
             exitmsg();
+            exit(0);
             break;
         }
         ll ctd=1;
         for (ll i = 0; i < strlen(a); i++)
         {
-            if(a[1]!=' '|| a[i]!='\0')
+            if(a[i]!=' '|| a[i]!='\0')
             {
                 ctd=0;
                 break;
@@ -169,6 +170,7 @@ int main()
         {
             exitmsg();
             exit(0);
+            break;
         }
 
         // scanf("%[^\n]s",a);

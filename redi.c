@@ -1,4 +1,9 @@
 #include "header.h"
+void callingpwd();
+void callingcd();
+void callingecho();
+void callingls();
+
 
 void callingredi(char *str)
 {
@@ -25,6 +30,7 @@ void callingredi(char *str)
         ll i=0;
         ll j=0;
         char *reruntask[100];
+        char restr[10000];
         char inp_file[1000];
         char out_file[1000];
         int out_type;
@@ -32,6 +38,7 @@ void callingredi(char *str)
         ll temp_flag_out=0;
         ll temp_flag_outappen=0;
         ll temp_flag_kick=0;
+        strcpy(restr,"");
         const char delimiters[] = " \t\n\0";
         char *totken = strtok(str, delimiters);
         while (totken != NULL)
@@ -73,6 +80,8 @@ void callingredi(char *str)
             else{
                 if(temp_flag_kick!=1){
                 reruntask[j]=totken;
+                strcat(restr,totken);
+                strcat(restr," ");
                 j++;
                 }
             }
@@ -156,17 +165,33 @@ void callingredi(char *str)
         {
             close(out_fd);
             perror("forking");
-        exit_fail=1;
+            exit_fail=1;
 
                 exit(0);
 
         }
         else if(pid==0)
         {
-            if(execvp(reruntask[0],reruntask)<0)
+            if(strcmp(reruntask[0],"pwd")==0)
+            {
+                callingpwd();
+            }
+            else if(strcmp(reruntask[0],"cd")==0)
+            {
+                callingcd(restr,0,execut);
+            }
+            else if(strcmp(reruntask[0],"echo")==0)
+            {
+                callingecho(restr,0,execut);
+            }
+            else if(strcmp(reruntask[0],"ls")==0)
+            {
+                callingls(restr,0,execut);
+            }
+            else if(execvp(reruntask[0],reruntask)<0)
             {
                 perror("command not found");
-        exit_fail=1;
+                exit_fail=1;
 
                 exit(0);
             }

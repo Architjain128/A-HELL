@@ -1,14 +1,3 @@
-jo
-quit
-hi
-hi
-quit
-hg
-hi
-hi
-hi
-[A[A
-jj
 jj
 jj
 jk
@@ -18,3 +7,14 @@ l
 cd ..
 cd ~
 cd -
+evince 
+cd ..
+ls
+sl
+  
+evince 
+pwd > in.txt
+pwd
+pwd > ou.txt
+ls -al > ou.txt
+echo "kk" >> ou.txt
