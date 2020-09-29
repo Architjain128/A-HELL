@@ -35,12 +35,15 @@ void callingcd(char *str,int zip, char *str1)
             if(chdir(str1)<0){
             fprintf(stdout,"\033[1;31m--> ERROR : directory not found [ %s ]\033[0m\n",temp);
             exit_fail=1;
+            exit(0);
             }
             if(strlen(temp)!=1){
             temp[0]='.';
             if(chdir(inp)<0){
             fprintf(stdout,"\033[1;31m--> ERROR : directory not found [ %s ]\033[0m\n",temp);
             exit_fail=1;
+            exit(0);
+
 
             }
             }
@@ -51,6 +54,8 @@ void callingcd(char *str,int zip, char *str1)
             if(chdir(predir)<0){
             fprintf(stdout,"\033[1;31m--> ERROR : directory not found [ %s ]\033[0m\n",temp);
             exit_fail=1;
+            exit(0);
+
 
             }
         }
@@ -59,11 +64,13 @@ void callingcd(char *str,int zip, char *str1)
             if(chdir(temp)<0){
             fprintf(stdout,"\033[1;31m--> ERROR : directory not found [ %s ]\033[0m\n",temp);
             exit_fail=1;
+            exit(0);
+
             }
         }
 
         free(temp);
     }
         free(temp2);
-
+    return;
 }

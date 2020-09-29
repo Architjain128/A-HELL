@@ -22,12 +22,12 @@ for (ll i = 0,j=0; i < strlen(str); i++)
 {
     if(str[i]=='@')
     {
-        sym[j]=1;
+        sym[j]=0;
         j++;
     }
     if(str[i]=='$')
     {
-        sym[j]=0;
+        sym[j]=1;
         j++;
     }
 }
@@ -66,10 +66,12 @@ for (ll i = 0,j=0; i < strlen(str); i++)
             else
             {
                 wait(NULL);
+                    sym_exit[i]=0;
+
             }
-            z=i;
+            // z=i;
         }
       
     }
-   exit_fail=sym_exit[z];
+//    exit_fail=sym_exit[z];
 }

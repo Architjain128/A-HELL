@@ -1,5 +1,53 @@
 #include "header.h"
 
+
+int lasthistory(char *str)
+{
+    char pa[10000];
+    strcpy(pa,execut);
+    strcat(pa,"/history.txt");
+    FILE *hp;
+    hp = fopen(pa,"r");
+    if(hp<0)
+    {
+       fprintf(stdout,"\033[1;31m--> ERROR :cannot check last history open history.txt\033[0m\n");
+        exit_fail=1;
+        return 0;
+    }
+    ll ctount=0;
+    for (char c = getc(hp); c != EOF; c = getc(hp)) 
+    if (c == '\n') 
+    ctount ++;
+
+    ll ct_dash=0;
+    char okokok[1000];
+    char s[1000];
+    strcpy(okokok,"");
+ int tount=1;
+        int pount=0;
+    if(ctount>0)
+    {
+        fseek(hp, 0, SEEK_END);
+        int pos = ftell(hp);
+        while (pos) {
+            fseek(hp, --pos, SEEK_SET); 
+            if (fgetc(hp) == '\n') {
+                if (pount++ == tount) break;
+            }
+        }
+        while (fgets(s, sizeof(s), hp) != NULL) {
+            strcat(okokok,s);
+        }
+okokok[strlen(okokok)-1]='\0';
+        if(strcmp(okokok,str)==0)
+        return 0;
+
+    }
+   
+        return 1;
+    
+}
+
 void addhistory(char *str,char *str1)
 {
     char pa[10000];
@@ -16,6 +64,13 @@ void addhistory(char *str,char *str1)
         exit_fail=1;
         return;
     }
+
+
+int gg= lasthistory(str);
+if(gg==1)
+{
+
+
       ll ctount=0;
     for (char c = getc(hp); c != EOF; c = getc(hp)) 
     if (c == '\n') 
@@ -50,6 +105,8 @@ void addhistory(char *str,char *str1)
 			remove(pa);
 			rename(pa1,pa);
     }
+}
+
 }
 
 

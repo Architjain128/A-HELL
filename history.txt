@@ -1,20 +1,20 @@
-cd .. ; ls -al
-cd .. ; ls -al 
-cd .. ; ls -al ;
+jo
+quit
+hi
+hi
+quit
+hg
+hi
+hi
+hi
+[A[A
+jj
+jj
+jj
+jk
+jk
+j
+l
+cd ..
 cd ~
-ls -al
-ls -al
-make clean
-
-ls -al
-ls @ ls -al $ echo hi
-ls D | echo no
-ls D @ echo no
-ls D | echo hi
-ls D $ echo hi
-ls D @ echo hi
-ls D $ echo no
-ls D @ echo no
-ls D @ echo no
-ls @ echo hi
-ls $ echo hi
+cd -
