@@ -1,6 +1,5 @@
 #include "header.h"
 #include "prompt.h"
-int sh;
 char *ex_st[]={"✔️  :')","❌ :'("};
 
 ll popwer(ll a,ll b)
@@ -30,11 +29,28 @@ void cinhand(int signum)
 
     if(cur_pid>0 && getpid()!=sh)
     {
-        signal(SIGINT,SIG_IGN);
+        exit_fail=1;
+        signal(SIGINT, cinhand);
+        exit_fail=1;
     }
     else
     {
         return;
+        // signal(SIGINT,SIG_IGN);
+    }
+    
+}
+void sighandlerz(int sig_num) 
+{ 
+    // Reset handler to catch SIGTSTP next time 
+    if(sh!=getpid() || cur_pid>0){
+        signal(SIGTSTP, sighandlerz); 
+        printf(" executed Ctrl+Z\n"); 
+    }
+    else 
+    {
+        signal(SIGTSTP, sighandlerz); 
+        printf(" Cannot execute Ctrl+Z on foreground process running \n"); 
     }
     
 }
@@ -45,7 +61,7 @@ void zhand(int signum)
         fprintf(stderr,"864z");
         if(kill(cur_pid,SIGTSTP)<0)
         {
-            perror("Cannot kill by ^C ");
+            perror(" Cannot kill by ^C ");
         }
         else
         {
@@ -57,7 +73,7 @@ void zhand(int signum)
     }
     else
     {
-     fprintf(stderr,"nothing");
+        printf(" Cannot execute Ctrl+C on shell need some foreground procedss running \n");
         return;
     }
 }
@@ -123,7 +139,7 @@ int main()
     while(1)
     {
 
-    signal(SIGTSTP,zhand);
+    signal(SIGTSTP,sighandlerz);
     signal(SIGINT, cinhand);
 
 

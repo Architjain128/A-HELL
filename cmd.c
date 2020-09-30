@@ -12,6 +12,21 @@
 
 // }
 
+void sighandler(int sig_num) 
+{ 
+    // Reset handler to catch SIGTSTP next time 
+    if(sh!=getpid() || cur_pid>0){
+        signal(SIGTSTP, sighandler); 
+        printf(" executed Ctrl+Z\n"); 
+    }
+    else 
+    {
+        signal(SIGTSTP, sighandler); 
+        printf("Cannot execute Ctrl+Z\n"); 
+    }
+    
+}
+
 void handler(int sig)
 {
 	pid_t pid;
@@ -107,6 +122,7 @@ void callingcmd(char* str,int zip,char* str9)
         }
         else if(pid==0)
         {
+            signal(SIGTSTP,sighandler);
              setpgid(0, 0);
 
             // signal(SIGTSTP,zhand);
@@ -133,7 +149,12 @@ void callingcmd(char* str,int zip,char* str9)
             stat_pro[order[job_counter][0]] = 1;
             order[job_counter][1] = 1;
             job_counter++;
-            waitpid(pid,&st,0);
+            waitpid(pid,&st,WUNTRACED);
+            
+            if(WIFSTOPPED(st))
+            {
+                stat_pro[pid]=2;
+            }
 
             tcsetpgrp(STDIN_FILENO, getpgrp());
 
