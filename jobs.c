@@ -123,7 +123,7 @@ void callingkjob(char *str)
         ll pik=0;
         for(int j=0;j<job_counter;j++)
         {
-            if(order[j][1]==-1 )
+            if(order[j][1]==-1 || stat_pro[order[j][0]]==2)
             {
                 pik++;
                 if(pik==jnum)
@@ -237,7 +237,7 @@ void callingfg(char *str)
         ll pik=0;
         for(int j=0;j<job_counter;j++)
         {
-            if(order[j][1]==-1 )
+            if(order[j][1]==-1 || stat_pro[order[j][0]]==2 )
             {
                 pik++;
                 if(pik==num)
@@ -329,7 +329,7 @@ void callingbg(char *str){
         ll pik=0;
         for(int j=0;j<job_counter;j++)
         {
-            if(order[j][1]==-1 )
+            if(order[j][1]==-1 || stat_pro[order[j][0]]==2 )
             {
                 pik++;
                 if(pik==num)
@@ -342,8 +342,7 @@ void callingbg(char *str){
         if(pik<num)
         {
             fprintf(stdout,"\033[1;31m--> ERROR : job number does not exists\033[0m\n");
-        exit_fail=1;
-
+            exit_fail=1;
         }
         else
         {

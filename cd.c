@@ -3,14 +3,17 @@
 void callingcd(char *str,int zip, char *str1)
 {
     char inp[10000];
+    strcpy(str,amd);
+   
     char *temp2=(char *)malloc(1024*(sizeof(char)));
-    temp2 = strtok(str, " \t");
+    temp2 = strtok(str, " ");
     ll i=0;
     while( temp2 != NULL && i<2 ) 
     {
         if(strcmp(temp2,"cd")!=0){
-            if(i==0)
+            if(i==0){
             strcpy(inp,temp2);
+            }
             i++;
         }
         temp2 = strtok(NULL, " \t");
@@ -42,7 +45,7 @@ void callingcd(char *str,int zip, char *str1)
             if(chdir(inp)<0){
             fprintf(stdout,"\033[1;31m--> ERROR : directory not found [ %s ]\033[0m\n",temp);
             exit_fail=1;
-            exit(0);
+            // exit(0);
 
 
             }
@@ -54,7 +57,7 @@ void callingcd(char *str,int zip, char *str1)
             if(chdir(predir)<0){
             fprintf(stdout,"\033[1;31m--> ERROR : directory not found [ %s ]\033[0m\n",temp);
             exit_fail=1;
-            exit(0);
+            // exit(0);
 
 
             }
@@ -64,7 +67,7 @@ void callingcd(char *str,int zip, char *str1)
             if(chdir(temp)<0){
             fprintf(stdout,"\033[1;31m--> ERROR : directory not found [ %s ]\033[0m\n",temp);
             exit_fail=1;
-            exit(0);
+            // exit(0);
 
             }
         }
@@ -72,5 +75,5 @@ void callingcd(char *str,int zip, char *str1)
         free(temp);
     }
         free(temp2);
-    return;
+    
 }

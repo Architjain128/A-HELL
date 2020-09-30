@@ -95,8 +95,6 @@
 
 ## POSSIBLE ERRORS
 + printing of prompt twice when q+enter is pressed in nightswatch (one for q+enter and other for next command ig!code)
-+ their is problem in strtok function it is not working as wanted (don't know why? working fine and submitted 2 days earlier to deadline but found on last day; this was also discussed by two Ta but i can't sort it) they are working fine when one command is entered at a time it is breaking **cd Desktop/** to **cd** and **Desk** or any other subsequence <br/><br/>
-<img src="./sub.jpeg" width="400">
-      
+
 
 

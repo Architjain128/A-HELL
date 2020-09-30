@@ -1,20 +1,20 @@
-echo "iakjbw   jbrlvo         lbrvjr    rkjv rk k " > in.txt
-wc in.txt
+cd ..
+
+cd ..
+
+cd ..
+
 ls
-make clean
-evince
-ls
-[A
-evince
-evince 
-evince
-jobs
-evince 
-jobs
-evince
-jobs
-ls
-evince
-evince &
+
+cd ..
+quit
+cd .
+quit
+
+cd ..
+cd .. ; ls -al ; cd archit/Desktop
+ls ..
+ls -al 
 evince
 jobs
+fg 1

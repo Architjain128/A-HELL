@@ -1,6 +1,6 @@
 #include "header.h"
 #include "prompt.h"
-char *ex_st[]={"✔️  :')","❌ :'("};
+char *ex_st[]={"✔️  :')","❌ :'(","⭕ :-|"};
 
 ll popwer(ll a,ll b)
 {
@@ -12,15 +12,15 @@ ll popwer(ll a,ll b)
 void msg()
 {
     printf("\033[1;34m\n<<==============================================================>>\033[0m\n");
-    printf("\033[1;31m                    😈 WELCOME IN A-HELL 😈\n");
+    printf("\033[1;31m                    😈 WELCOME TO A-HELL 😈\n");
     printf("\033[0;31m                                 - created by Archit Jain\n");
     printf("\033[1;34m<<==============================================================>>\033[0m\n");
 }
 void exitmsg()
 {
     printf("\n\033[1;34m<<==============================================================>>\033[0m\n");
-    printf("\033[1;31m                       OH HELL NO 👿\n");
-    printf("\033[0;31m                         BYE !!!\n");
+    printf("\033[1;31m                      👿  OH HELL NO  👿\n");
+    printf("\033[0;31m                            BYE !!!\n");
     printf("\033[1;34m<<==============================================================>>\033[0m\n");
     // exit(0);
 }
@@ -35,6 +35,8 @@ void cinhand(int signum)
     }
     else
     {
+        exit_fail=0;
+        printf(" Foreground process with pid %d has been stopped and sent in background\n",cur_pid);
         return;
         // signal(SIGINT,SIG_IGN);
     }
@@ -117,6 +119,7 @@ void zhand(int signum)
 
 typedef long long int ll;
 int zpipp=0;
+int ppipp=0;
 int main()
 {
     system("clear");
@@ -139,8 +142,8 @@ int main()
     while(1)
     {
 
-    signal(SIGTSTP,sighandlerz);
-    signal(SIGINT, cinhand);
+        signal(SIGTSTP,sighandlerz);
+        signal(SIGINT, cinhand);
 
 
         strcpy(predir,curdir);
@@ -151,7 +154,16 @@ int main()
             zpipp++;
         }
         prompt_pathy();
-        sprintf(dis, "%s <\033[1;32m%s\033[0m@\033[1;32m%s\033[0m:\033[1;34m%s\033[0m> ",ex_st[exit_fail],user,host,dir);
+        if(ppipp==0)
+        {
+            sprintf(dis, "%s <\033[1;32m%s\033[0m@\033[1;32m%s\033[0m:\033[1;34m%s\033[0m> ",ex_st[2],user,host,dir);
+            ppipp=1;
+        }
+        else
+        {
+            sprintf(dis, "%s <\033[1;32m%s\033[0m@\033[1;32m%s\033[0m:\033[1;34m%s\033[0m> ",ex_st[exit_fail],user,host,dir);
+        }
+        
         fprintf(stdout,"%s",dis);
         fflush(stdout);
 
@@ -162,33 +174,14 @@ int main()
         strcpy(a,"");
         fgets(a,sizeof(a),stdin);
         a[strlen(a)-1]='\0';
-        
        
     
-        if (a == NULL) {
-            printf("Shell is exited due to ctrl+D\n");  /* Exit on Ctrl-D */
-            exitmsg();
-            exit(0);
-            break;
-        }
-        ll ctd=1;
-        for (ll i = 0; i < strlen(a); i++)
-        {
-            if(a[i]!=' '|| a[i]!='\0')
-            {
-                ctd=0;
-                break;
-            }
-        }
-        
-        if(ctd==1)
-        {
-            exitmsg();
-            exit(0);
-            break;
-        }
+    if(feof(stdin))
+    {
+        exitmsg();
+        exit(0);
+    }
 
-        // scanf("%[^\n]s",a);
         addhistory(a,execut);
 
         ll ink=0; 
@@ -200,6 +193,7 @@ int main()
             ink++;
             cmdd = strtok(NULL, ";");
         }
+
         ll pop=0;
         ll fu_pipe=0;
         ll fu_redi=0;
@@ -208,7 +202,11 @@ int main()
         {
             ll pin=0;
             strcpy(amd,arc[pop]);
-            amd[strlen(a)]='\0';
+            strcat(amd," \0");
+
+            // printf("[%s] [%s]\n",amd,arc[pop]);
+
+            // amd[strlen(a)]='\0';
             while(amd[pin]==' ' ||amd[pin]=='\t' )
             pin++;
 
