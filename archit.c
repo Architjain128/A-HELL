@@ -27,7 +27,7 @@ void exitmsg()
 void cinhand(int signum)
 {
 
-    if(cur_pid>0 && getpid()!=sh)
+    if(cur_pid>0 || getpid()!=sh)
     {
         exit_fail=1;
         signal(SIGINT, cinhand);
@@ -88,8 +88,13 @@ void zhand(int signum)
 #include "pipe.h"
 #include "boom.h"
 #include "pinfo.h"
-#include "env.h"
+#include "unsetenv.h"
+#include "setenv.h"
 #include "jobs.h"
+#include "kjob.h"
+#include "fg.h"
+#include "bg.h"
+#include "overkill.h"
 #include "history.h"
 #include "nightwatch.h"
 #include "redi.h"

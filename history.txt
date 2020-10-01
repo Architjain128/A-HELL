@@ -1,20 +1,20 @@
-bg 1
-evince 
+cd try
+./a.out &
 jobs
-// if(amd[pin]=='\0' && pop==0)
-            // {
-            //     exitmsg();
-            //     exit(0);
-cd ..
-cat < in.txt
-cat < inx.txt
-cat < in.txt
-cat < inn.txt
-cat < in.txt
-cat < inn.txt
-cat < in.txt
-cat < inn.txt
-cat < in.txt
-cat < inn.txt
-cat < in.txt
-evince
+bg 3
+jobs
+./a.out &
+jobs
+bg 4
+jobs
+overkill
+jobs
+env
+setenv archit a
+env
+setenv archit
+env
+unsetenv archit
+env
+setenv archit oh mu kjbdv
+env
