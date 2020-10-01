@@ -49,6 +49,7 @@ void callingjobs(){
             j++;
         }
     }
+    return;
 }
 
 
@@ -163,6 +164,7 @@ void callingkjob(char *str)
             }
         }
     }
+    return;
 }
 
 
@@ -180,6 +182,7 @@ void callingoverkill()
             stat_pro[order[j][0]]=0;
         }
     }
+    return;
 }
 
 
@@ -271,6 +274,7 @@ void callingfg(char *str)
 			}
         }
     }
+    return;
 }
 
 void callingbg(char *str){
@@ -353,5 +357,6 @@ void callingbg(char *str){
             }
         }
     }
+    return;
 }
 

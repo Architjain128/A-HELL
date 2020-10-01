@@ -82,6 +82,7 @@ void getcm(ll a)
         totken = strtok(NULL, delimiters);
     }
     runtask[j]=NULL;
+    return;
 }
 
 void callingpiponly(char *str)
@@ -279,6 +280,7 @@ void callingpiponly(char *str)
     for(i = 0; i <=num_pipe; i++)
         wait(&status);
     // printf("ALL Done");
+    return;
 }
    
 

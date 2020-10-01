@@ -12,4 +12,5 @@ void callingecho(char *str,int zip, char *str1)
     }
     printf("\n");
     free(temp2);
+    return;
 }

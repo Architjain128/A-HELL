@@ -24,5 +24,5 @@ void callingpwd(char *str)
 	char lot[1024];
 	getcwd(lot,sizeof(lot));
 	printf("%s\n",lot);
-
+    return;
 }

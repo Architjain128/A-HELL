@@ -160,4 +160,5 @@ void nightwatch(char *str, char *str1){
         exit_fail=1;
 
         }
+        return;
 }

@@ -24,7 +24,7 @@ void sighandler(int sig_num)
         signal(SIGTSTP, sighandler); 
         printf("Cannot execute Ctrl+Z\n"); 
     }
-    
+    return;
 }
 
 void handler(int sig)
@@ -162,4 +162,5 @@ void callingcmd(char* str,int zip,char* str9)
             signal(SIGTTOU, SIG_DFL);
         }
     }
+    return;
 }

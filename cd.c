@@ -3,10 +3,8 @@
 void callingcd(char *str,int zip, char *str1)
 {
     char inp[10000];
-    strcpy(str,amd);
-   
-    char *temp2=(char *)malloc(1024*(sizeof(char)));
-    temp2 = strtok(str, " ");
+    strcpy(inp,"");
+    char *temp2=strtok(str, " \t");
     ll i=0;
     while( temp2 != NULL && i<2 ) 
     {
@@ -21,7 +19,9 @@ void callingcd(char *str,int zip, char *str1)
 
     if(strlen(inp)==0)
     {
-        chdir(str1);
+        // chdir(str1);
+        //     exit(0);
+        return;
     }
     else
     { 
@@ -35,20 +35,21 @@ void callingcd(char *str,int zip, char *str1)
 
         if(temp[0]=='~')
         {
-            if(chdir(str1)<0){
-            fprintf(stdout,"\033[1;31m--> ERROR : directory not found [ %s ]\033[0m\n",temp);
-            exit_fail=1;
-            exit(0);
+            if(chdir(str1)<0)
+            {
+                fprintf(stdout,"\033[1;31m--> ERROR : directory not found [ %s ]\033[0m\n",temp);
+                exit_fail=1;
+                exit(0);
             }
-            if(strlen(temp)!=1){
-            temp[0]='.';
-            if(chdir(inp)<0){
-            fprintf(stdout,"\033[1;31m--> ERROR : directory not found [ %s ]\033[0m\n",temp);
-            exit_fail=1;
-            // exit(0);
-
-
-            }
+            if(strlen(temp)!=1)
+            {
+                temp[0]='.';
+                if(chdir(inp)<0)
+                {
+                    fprintf(stdout,"\033[1;31m--> ERROR : directory not found [ %s ]\033[0m\n",temp);
+                    exit_fail=1;
+                    // exit(0);
+                }
             }
         }
         else if(temp[0]=='-')
@@ -58,22 +59,19 @@ void callingcd(char *str,int zip, char *str1)
             fprintf(stdout,"\033[1;31m--> ERROR : directory not found [ %s ]\033[0m\n",temp);
             exit_fail=1;
             // exit(0);
-
-
             }
         }
-        else{
-            
+        else
+        {    
             if(chdir(temp)<0){
             fprintf(stdout,"\033[1;31m--> ERROR : directory not found [ %s ]\033[0m\n",temp);
             exit_fail=1;
             // exit(0);
-
             }
         }
 
         free(temp);
     }
         free(temp2);
-    
+    return ;
 }

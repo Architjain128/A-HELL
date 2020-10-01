@@ -34,6 +34,7 @@ void callingunsetenv(char* str)
             exit_fail=1;
         }
     }
+    return;
 }
 
 void callingsetenv(char* str)
@@ -79,6 +80,7 @@ void callingsetenv(char* str)
         printf("\033[0;33m--> ERROR : setenv failed \033[0m\n");
         perror(";(");
         exit_fail=1;
-        exit(EXIT_FAILURE);
+        // exit(EXIT_FAILURE);
     }
+    return;
 }

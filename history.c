@@ -105,7 +105,7 @@ if(gg==1)
 			rename(pa1,pa);
     }
 }
-
+return;
 }
 
 
@@ -218,5 +218,5 @@ void callinghistory(char *str,int zip,char *str1){
         }
         
     }
-    
+ return;   
 }

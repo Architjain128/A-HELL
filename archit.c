@@ -172,14 +172,29 @@ int main()
         exit_fail=0;
         cur_pid=-1;
         strcpy(a,"");
-        fgets(a,sizeof(a),stdin);
+
+        if(fgets(a,sizeof(a),stdin)==0)
+        {
+            printf("^D\n");
+            exitmsg();
+            while(1)
+            {
+                exit(0);
+            }
+            // fuch=1;
+        }
         a[strlen(a)-1]='\0';
        
     
     if(feof(stdin))
     {
+        printf("^D\n");
         exitmsg();
-        exit(0);
+        while(1)
+        {
+            exit(0);
+        }
+        // fuch=1;
     }
 
         addhistory(a,execut);
@@ -203,18 +218,16 @@ int main()
             ll pin=0;
             strcpy(amd,arc[pop]);
             strcat(amd," \0");
-
             // printf("[%s] [%s]\n",amd,arc[pop]);
-
             // amd[strlen(a)]='\0';
             while(amd[pin]==' ' ||amd[pin]=='\t' )
             pin++;
 
-            if(amd[pin]=='\0' && pop==0)
-            {
-                exitmsg();
-                exit(0);
-            }
+            // if(amd[pin]=='\0' && pop==0)
+            // {
+            //     exitmsg();
+            //     exit(0);
+            // }
                 fu_pipe=0;
                 fu_redi=0;
                 fu_boom=0;
@@ -539,4 +552,5 @@ int main()
 
         }
     }
+    return 0;
 }

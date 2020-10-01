@@ -1,20 +1,20 @@
-cd ..
-
-cd ..
-
-cd ..
-
-ls
-
-cd ..
-quit
-cd .
-quit
-
-cd ..
-cd .. ; ls -al ; cd archit/Desktop
-ls ..
-ls -al 
-evince
+bg 1
+evince 
 jobs
-fg 1
+// if(amd[pin]=='\0' && pop==0)
+            // {
+            //     exitmsg();
+            //     exit(0);
+cd ..
+cat < in.txt
+cat < inx.txt
+cat < in.txt
+cat < inn.txt
+cat < in.txt
+cat < inn.txt
+cat < in.txt
+cat < inn.txt
+cat < in.txt
+cat < inn.txt
+cat < in.txt
+evince

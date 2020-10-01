@@ -1,4 +1,5 @@
 # include "header.h"
+void callingcmd(char *str,int zip,char* str9);
 
 void getboom(int a){
     ll j=0;
@@ -57,6 +58,7 @@ for (ll i = 0,j=0; i < strlen(str); i++)
             }
             else if(pid==0)
             {
+                // callingcmd(extasks[i],0,execut);
                 if(execvp(exruntask[0],exruntask)<0)
                 {
                     perror("cmd not found");
@@ -73,5 +75,6 @@ for (ll i = 0,j=0; i < strlen(str); i++)
         }
       
     }
-//    exit_fail=sym_exit[z];
+   exit_fail=2;
+   return;
 }

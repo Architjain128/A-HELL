@@ -302,6 +302,7 @@ void callingls(char *str,int zip,char *str1)
             printf("\n");
         }
     }
+    return;
 }
 
 
@@ -478,9 +479,5 @@ void callingla(char *str,int zip,char *str1)
             printf("\n");
         }
     }
+    return;
 }
-
-
-
-
-

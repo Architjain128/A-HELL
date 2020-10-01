@@ -248,17 +248,19 @@ void callingredi(char *str)
             {
                 callingcmd(restr,0,execut);
             }
-            // else if(execvp(reruntask[0],reruntask)<0)
+            
+            // else if (execvp(reruntask[0],reruntask)<0)
             // {
             //     perror("command not found");
             //     exit_fail=1;
             //     exit(0);
             // }
+            
             exit(0);
         }
         else
         {
-            wait(NULL);
+            // wait(NULL);
             if(dup2(stdout_fd,STDOUT_FILENO)<0)
             {
                 perror("reassign sdtout");
@@ -270,4 +272,5 @@ void callingredi(char *str)
                 exit_fail=1;
             } 
         }    
+        return;
 }
