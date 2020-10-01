@@ -5,7 +5,7 @@
         ->  make
         -> ./A-Hell
 
-    to remove objectfiles 
+    to remove object and text files 
         -> make clean
 
 ## Features
@@ -14,7 +14,7 @@
 + cd
 + ls
 + pinfo
-+ exit/quit
++ exit/quit  ( also by pressing Ctrl+d )
 + foreground commands
 + background commands with exit status
 + redirection only
@@ -29,21 +29,21 @@
 + overkill
 
 - Signal Detection
-    * Ctrl+Z  : stopped foreground and send it in background  `pending`
+    * Ctrl+Z  : stopped foreground and send it in background 
     * Ctrl+C  : kill any foreground process
-    * Ctrl+D  : exit shell (EOF)  `faulty`
+    * Ctrl+D  : exit shell (EOF) 
 
 - BONUS COMMANDS
     + history
     + nightswatch
         + interrupt
-        + nerborn
-    + last dir : assuming that in starting of shell lastdir = executable address (till directory changes)
-    + exit status 
-    + chaining commands 
+        + newborn
+    + last dir by `cd -` : assuming that in starting of shell lastdir = executable address (till directory changes)
+    + exit status along with prompt
+    + chaining commands with `@` as AND, and `$` as OR
 
 - EXTRA COMMANDS
-    + to clear the terminal screen by system("cls")
+    + to clear the terminal screen by system("clear")
         * syntax -> clear
 
 
@@ -61,8 +61,16 @@
     + nightwatch.c    :codes for nightswatch command
     + redi.c : code for redirection commands only(SP1)
     + piponly.c : code for pipeonly commands only(SP2)
-    + env.c     : new cmds (setenv,unsetenv)
-    + jobs.c : new cmds (jobs,kjob,fg,bg,overkill)
+    + pipe.c : code to execute piping with redirection (SP3)
+    + ppp.c : helper code for pipe.c
+    + setenv.c     : code for setenv command
+    + unsetenv.c     : code for unsetenv command
+    + jobs.c : code for jobs command
+    + kjob.c : code for kjob command
+    + overkill.c : code for overkill command
+    + fg.c : code for fg command
+    + bg.c : code for bg command
+    + boom.c : code for chained commands
 
 
 + Header file
@@ -78,23 +86,35 @@
     + nightswatch.h
     + redi.h
     + piponly.h
-    + added.h
+    + pipe.h
+    + ppp.h
+    + setenv.h
+    + unsetenv.h
+    + jobs.h
+    + kjob.h
+    + fg.h
+    + bg.h
+    + overkill.h
+    + boom.h
 
 + makefile   
 
 + README.md  : itself 
-* Except all are useless in hell 
+
+* All other files are useless in hell
 
 ## ASSUMPTIONS
 + Outputs of all internal processes can redirected to a file but inputs cannot 
 + In piping, pipine+redirection and chaining we use don't use internal commands
-+ WARNING status in yellow colour if cmd has extra arguments, then the ouput will be for minimal( default with no flags ) cmd
-+ ERROR status in red colour if cmd is facing error with corresponding error 
++ exit status is set neutral for chainned commands and exit staus `SUCESS` for complete execution or WARNING in a command else if any ytype of error detected it will be set as `FAILURE` 
++ `WARNING` status in yellow colour if cmd has extra arguments, then the ouput will be for minimal( default with no flags ) cmd
++ `ERROR` status in red colour if cmd is facing error with corresponding error 
 + added colours in prompt to deffrentiate it by other
 + added extra msg at starting and exit position
 
 ## POSSIBLE ERRORS
-+ printing of prompt twice when q+enter is pressed in nightswatch (one for q+enter and other for next command ig!code)
++ printing of prompt twice when `q+enter` is pressed in nightswatch (one for q+enter and other for next command ig!code)
++ `CTRL+D` needs to be pressed multiple times to exit the shell
 
 
 

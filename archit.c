@@ -36,7 +36,6 @@ void cinhand(int signum)
     else
     {
         exit_fail=0;
-        printf(" Foreground process with pid %d has been stopped and sent in background\n",cur_pid);
         return;
         // signal(SIGINT,SIG_IGN);
     }
