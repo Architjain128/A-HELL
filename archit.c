@@ -22,7 +22,7 @@ void exitmsg()
     printf("\033[1;31m                      👿  OH HELL NO  👿\n");
     printf("\033[0;31m                            BYE !!!\n");
     printf("\033[1;34m<<==============================================================>>\033[0m\n");
-    // exit(0);
+    
 }
 void cinhand(int signum)
 {
@@ -185,6 +185,7 @@ int main()
             while(1)
             {
                 exit(0);
+                return 0;
             }
             // fuch=1;
         }
@@ -198,6 +199,8 @@ int main()
         while(1)
         {
             exit(0);
+                return 0;
+
         }
         // fuch=1;
     }

@@ -94,8 +94,9 @@ void callingcmd(char* str,int zip,char* str9)
             {
                 fprintf(stderr,"command: not found\n" );
                 exit_fail=1;
-                // exit(0);
+                exit(0);
             }
+            return;
         }
         else
         {
@@ -132,6 +133,7 @@ void callingcmd(char* str,int zip,char* str9)
                 fprintf(stderr,"command: not found\n");
                 cur_pid=0;
                 exit_fail=1;
+                exit(0);
             }
             return ;
         }
@@ -160,6 +162,7 @@ void callingcmd(char* str,int zip,char* str9)
 
             signal(SIGTTIN, SIG_DFL);
             signal(SIGTTOU, SIG_DFL);
+           
         }
     }
     return;

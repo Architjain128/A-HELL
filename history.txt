@@ -1,15 +1,3 @@
-cd try
-./a.out &
-jobs
-bg 3
-jobs
-./a.out &
-jobs
-bg 4
-jobs
-overkill
-jobs
-env
 setenv archit a
 env
 setenv archit
@@ -18,3 +6,15 @@ unsetenv archit
 env
 setenv archit oh mu kjbdv
 env
+lknw
+ls @ echo hi
+vdkn
+ls @ echo hi
+dkv
+ljr 
+jv
+hgc
+tf
+khb
+kjb
+ls @ echo hi
