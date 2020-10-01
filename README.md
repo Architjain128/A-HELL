@@ -114,7 +114,7 @@
 
 ## POSSIBLE ERRORS
 + printing of prompt twice when `q+enter` is pressed in nightswatch (one for q+enter and other for next command ig!code)
-+ `CTRL+D` needs to be pressed multiple times to exit the shell
+
 
 
 
